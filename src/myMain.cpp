@@ -54,29 +54,29 @@ int myMain()
 {
 	
 	// Define box2d world
-	b2Vec2 gravity(0.0f, -10.0f);
+	b2Vec2 gravity(0.0f, -20.0f);
 	b2World world(gravity);
 
 
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, -10.0f);
+	groundBodyDef.position.Set(0.0f, -2.0f);
 	b2Body* groundBody = world.CreateBody(&groundBodyDef);
 	b2PolygonShape groundBox;
-	groundBox.SetAsBox(50.0f, 10.0f);
+	groundBox.SetAsBox(300.0f, 2.0f);
 	groundBody->CreateFixture(&groundBox, 0.0f);
 
 	//define a box on the ground
 	b2BodyDef boxDef;
 	boxDef.type = b2_dynamicBody;
-	boxDef.position.Set(-1.5f, 1.01f);
+	boxDef.position.Set(-1.5f, 5.01f);
 	b2Body* box = world.CreateBody(&boxDef);
 
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(1.0f, 1.0f);
+	boxShape.SetAsBox(5.0f, 5.0f);
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
-	boxFixtureDef.density = 2.0f;
+	boxFixtureDef.density = 0.5f;
 	boxFixtureDef.friction = 0.0f;
 	box->CreateFixture(&boxFixtureDef);
 
@@ -84,13 +84,13 @@ int myMain()
 	// Define the dynamic body. We set its position and call the body factory.
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 6.0f);
+	bodyDef.position.Set(0.0f, 20.0f);
 	b2Body* body = world.CreateBody(&bodyDef);
 	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(1.0f, 1.0f);
+	dynamicBox.SetAsBox(5.0f, 5.0f);
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 1.0f;
+	fixtureDef.density = 0.5f;
 	fixtureDef.friction = 0.3f;
 	body->CreateFixture(&fixtureDef);
 
@@ -111,10 +111,6 @@ int myMain()
 	int32 positionIterations = 2;
 
 
-	
-	b2Vec2 bodyPosition = body->GetPosition();
-	float bodyAngle = body->GetAngle();
-
 	while (window.isOpen())
 	{
 		//input
@@ -126,17 +122,17 @@ int myMain()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			b2Vec2 impulse(-20.0f, 0.0f);
+			b2Vec2 impulse(-50.0f, 0.0f);
 			body->ApplyLinearImpulseToCenter(impulse, true);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			b2Vec2 impulse(20.0f, 0.0f);
+			b2Vec2 impulse(50.0f, 0.0f);
 			body->ApplyLinearImpulseToCenter(impulse, true);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			b2Vec2 impulse(0.0f, 20.0f);
+			b2Vec2 impulse(0.0f, 50.0f);
 			body->ApplyLinearImpulseToCenter(impulse, true);
 		}
 
@@ -144,10 +140,6 @@ int myMain()
 		world.Step(timeStep, velocityIterations, positionIterations);
 
 		//affichage
-
-		bodyPosition = body->GetPosition();
-		bodyAngle = body->GetAngle();
-
 
 		window.clear();
 
