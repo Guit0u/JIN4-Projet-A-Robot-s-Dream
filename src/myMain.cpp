@@ -1,14 +1,8 @@
 #include "myMain.h"
-#include "box2d/box2d.h"
-#include "SFML/Graphics.hpp"
-#include <map>
-#include <stdio.h>
-#include <assert.h>
 
 
-#define height 800
-#define width 800
-#define scale 2
+#define windowHeight 800
+#define windowWidth 800
 
 void drawBody(b2Body* body, sf::RenderWindow& window, std::pair<double,double> viewportOffset)
 {
@@ -81,22 +75,11 @@ int myMain()
 	box->CreateFixture(&boxFixtureDef);
 
 
-	// Define the dynamic body. We set its position and call the body factory.
-	b2BodyDef bodyDef;
-	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 20.0f);
-	b2Body* body = world.CreateBody(&bodyDef);
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(5.0f, 5.0f);
-	b2FixtureDef fixtureDef;
-	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 0.5f;
-	fixtureDef.friction = 0.3f;
-	body->CreateFixture(&fixtureDef);
-
+	//define player
+	Player player(world);
 
 	//define window
-	sf::RenderWindow window(sf::VideoMode(width, height), "test platforme");
+	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
 	window.setFramerateLimit(60);
 
 
@@ -120,21 +103,8 @@ int myMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-		{
-			b2Vec2 impulse(-50.0f, 0.0f);
-			body->ApplyLinearImpulseToCenter(impulse, true);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-		{
-			b2Vec2 impulse(50.0f, 0.0f);
-			body->ApplyLinearImpulseToCenter(impulse, true);
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-		{
-			b2Vec2 impulse(0.0f, 50.0f);
-			body->ApplyLinearImpulseToCenter(impulse, true);
-		}
+
+		player.processInput();
 
 		//physique
 		world.Step(timeStep, velocityIterations, positionIterations);
@@ -143,7 +113,7 @@ int myMain()
 
 		window.clear();
 
-		drawBody(body, window, { -400.0, -400.0 });
+		player.draw(window, { -400.0, -400.0 });
 		drawBody(box, window, { -400.0, -400.0 });
 		drawBody(groundBody, window, { -400.0, -400.0 });
 
