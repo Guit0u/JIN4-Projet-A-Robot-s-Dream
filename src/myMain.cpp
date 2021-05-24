@@ -19,50 +19,26 @@ void drawBody(b2Body* body, sf::RenderWindow& window, std::pair<double,double> v
 		{
 		case b2Shape::e_polygon:
 			{
-				b2Vec2 size { 0.0, 0.0 };
-				b2Vec2 pos;
-
-
 				b2PolygonShape* poly = (b2PolygonShape*)fixture->GetShape();
 				int32 vertexCount = poly->m_count;
 
-				if (vertexCount == 4)
+				if (vertexCount >= 3)
 				{
-					pos = poly->m_vertices[0];
+					sf::ConvexShape convex;
+					convex.setPointCount(vertexCount);
 
-					for (int32 i = 1; i < 4; ++i)
+					for (int32 i = 0; i < vertexCount; ++i)
 					{
-						b2Vec2 vertex = poly->m_vertices[i];
-						if (vertex.x < pos.x)
-						{
-							size.x += pos.x - vertex.x;
-							pos.x = vertex.x;
-						}
-						else if (vertex.x > pos.x + size.x)
-						{
-							size.x += vertex.x - pos.x;
-						}
-
-						if (vertex.y < pos.y)
-						{
-							size.y += pos.y - vertex.y;
-							pos.y = vertex.y;
-						}
-						else if (vertex.y > pos.y + size.y)
-						{
-							size.y += vertex.y - pos.y;
-						}
-
+						b2Vec2 pos = poly->m_vertices[i];
+						pos += body->GetPosition();
+						convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
 					}
-					pos += body->GetPosition();
-					sf::RectangleShape rectangle(sf::Vector2f(size.x, size.y));
-					rectangle.setPosition(sf::Vector2f(pos.x-viewportOffset.first, -pos.y-viewportOffset.second));
-					rectangle.setFillColor(sf::Color::Green);
-					rectangle.setOutlineColor(sf::Color::White);
-					rectangle.setOutlineThickness(1);
-					window.draw(rectangle);
+					convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
+					convex.setFillColor(sf::Color::Green);
+					convex.setOutlineColor(sf::Color::White);
+					convex.setOutlineThickness(0);
+					window.draw(convex);
 				}
-
 			}
 			break;
 
