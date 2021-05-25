@@ -1,7 +1,6 @@
 #include "Player.h"
 
 
-
 Player::Player(b2World& world)
 {
 	b2BodyDef bodyDef;
@@ -40,11 +39,11 @@ void Player::processInput()
 	}
 }
 
-void Player::draw(sf::RenderWindow& window, std::pair<double, double> viewportOffset)
+void Player::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
 	b2Fixture* fixture = body->GetFixtureList();
 
-	b2PolygonShape* poly = (b2PolygonShape*)fixture->GetShape();
+	auto const poly = (b2PolygonShape*)fixture->GetShape();
 	int32 vertexCount = poly->m_count;
 
 	sf::ConvexShape convex;

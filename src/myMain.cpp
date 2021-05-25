@@ -51,29 +51,40 @@ int myMain()
 	b2Vec2 gravity(0.0f, -20.0f);
 	b2World world(gravity);
 
-
+	/*
 	// Define the ground body.
 	b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(0.0f, -2.0f);
+
 	b2Body* groundBody = world.CreateBody(&groundBodyDef);
+
 	b2PolygonShape groundBox;
 	groundBox.SetAsBox(300.0f, 2.0f);
+
 	groundBody->CreateFixture(&groundBox, 0.0f);
 
 	//define a box on the ground
 	b2BodyDef boxDef;
 	boxDef.type = b2_dynamicBody;
 	boxDef.position.Set(-1.5f, 5.01f);
+
 	b2Body* box = world.CreateBody(&boxDef);
 
 	b2PolygonShape boxShape;
 	boxShape.SetAsBox(5.0f, 5.0f);
+
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 0.5f;
 	boxFixtureDef.friction = 0.0f;
-	box->CreateFixture(&boxFixtureDef);
 
+	box->CreateFixture(&boxFixtureDef);
+	*/
+
+	//define level
+	Level level;
+	level.addStaticElement(world, b2Vec2(0.0f, -2.0f), b2Vec2(600.0f, 4.0f));
+	level.addDynamicElement(world, b2Vec2(-1.5f, 5.01f), b2Vec2(10.0f, 10.0f), 0.5f, 0.0f);
 
 	//define player
 	Player player(world);
@@ -114,9 +125,11 @@ int myMain()
 		window.clear();
 
 		player.draw(window, { -400.0, -400.0 });
+		/*
 		drawBody(box, window, { -400.0, -400.0 });
 		drawBody(groundBody, window, { -400.0, -400.0 });
-
+		*/
+		level.draw(window, { -400.0, -400.0 });
 		window.display();
 	}
 	

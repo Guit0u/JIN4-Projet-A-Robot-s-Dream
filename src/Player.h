@@ -14,7 +14,7 @@ public:
 	explicit Player(b2World& world);
 
 	void processInput();
-	void draw(sf::RenderWindow& window, std::pair<double, double> viewportOffset);
+	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
 private:
 	b2Body* body;
