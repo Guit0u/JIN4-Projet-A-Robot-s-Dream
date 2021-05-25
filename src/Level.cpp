@@ -6,6 +6,7 @@ void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffse
 	{
 		elements[i]->draw(window, viewportOffset);
 	}
+	
 }
 
 void Level::addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size)
