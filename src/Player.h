@@ -5,8 +5,9 @@
 
 #define playerWidth 10
 #define playerHight 10
-#define horizontalInpulseIntensity 50
-#define verticalInputIntesity 30
+#define maxSpeed 100
+#define horizontalInpulseIntensity 5000
+#define verticalInputIntesity 150000
 
 class Player
 {
@@ -18,4 +19,12 @@ public:
 
 private:
 	b2Body* body;
+
+	enum PlayerState
+	{
+		onGroud,
+		inAir
+	};
+	PlayerState playerState = PlayerState::onGroud;
+	float lastY = 20;
 };

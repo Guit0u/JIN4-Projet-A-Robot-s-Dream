@@ -54,8 +54,8 @@ int myMain()
 
 		window.clear();
 
-		player.draw(window, { -400.0, -400.0 });
-		level.draw(window, { -400.0, -400.0 });
+		player.draw(window, { -400.0f, -400.0f });
+		level.draw(window, { -400.0f, -400.0f });
 		window.display();
 	}
 	

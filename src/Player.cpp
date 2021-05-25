@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world)
+Player::Player(b2World& world) 
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
@@ -15,27 +15,47 @@ Player::Player(b2World& world)
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 0.5f;
-	fixtureDef.friction = 0.3f;
+	fixtureDef.friction = 0.5f;
 
 	body->CreateFixture(&fixtureDef);
 }
 
 void Player::processInput()
 {
+	if (lastY != body->GetPosition().y)
+	{
+		playerState = PlayerState::inAir;
+	}
+	else
+	{
+		playerState = PlayerState::onGroud;
+	}
+	lastY = body->GetPosition().y;
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		b2Vec2 impulse(-horizontalInpulseIntensity, 0.0f);
-		body->ApplyLinearImpulseToCenter(impulse, true);
+		body->ApplyForceToCenter(impulse, true);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
 		b2Vec2 impulse(horizontalInpulseIntensity, 0.0f);
-		body->ApplyLinearImpulseToCenter(impulse, true);
+		body->ApplyForceToCenter(impulse, true);
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && playerState == PlayerState::onGroud)
 	{
 		b2Vec2 impulse(0.0f, verticalInputIntesity);
-		body->ApplyLinearImpulseToCenter(impulse, true);
+		body->ApplyForceToCenter(impulse, true);
+	}
+
+	b2Vec2 velocity = body->GetLinearVelocity();
+	if (velocity.LengthSquared() > maxSpeed*maxSpeed)
+	{
+		velocity.Normalize();
+		velocity = b2Vec2(velocity.x * maxSpeed, velocity.y * maxSpeed);
+		body->SetLinearVelocity(velocity);
 	}
 }
 
