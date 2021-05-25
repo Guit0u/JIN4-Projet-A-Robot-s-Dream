@@ -14,11 +14,10 @@ int myMain()
     sf::RenderWindow window(sf::VideoMode(640, 640), "SFML works!");
     window.setFramerateLimit(60);
 
-
     pugi::xml_document doc;
     doc.load_file("resources/test_dialogue.xml");
-   
-    DialogueBox dialogue(doc.first_child(), window);
+    pugi::xml_node currNode(doc.first_child().first_child());
+    DialogueBox dialogue(doc.first_child().first_child(), window);
 
     sf::Font font;
     if (!font.loadFromFile(doc.first_child().attribute("FontFile").as_string())) {
@@ -31,13 +30,14 @@ int myMain()
     {
         window.clear();
 
-
-
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+                dialogue.setNextLine(currNode);
+            }
         }
 
         dialogue.display(window);

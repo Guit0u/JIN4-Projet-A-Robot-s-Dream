@@ -9,6 +9,7 @@ public:
 	void display(sf::RenderWindow &window);
 	sf::Text getText();
 	void setFont(sf::Font const& font);
+	void setNextLine(pugi::xml_node &node);
 
 private :
 	sf::Text line;

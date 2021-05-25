@@ -35,7 +35,7 @@ DialogueBox::DialogueBox(pugi::xml_node const &node, sf::RenderWindow &window) {
 	line.setCharacterSize(node.attribute("CharacterSize").as_int());
     line.setFillColor(getColorFromString(node.attribute("TextColor").as_string()));	
     line.setString(node.attribute("string").as_string());
-    //line.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
+    line.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
     background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
     background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
     background.setOutlineThickness(2);
@@ -54,4 +54,14 @@ sf::Text DialogueBox::getText() {
 
 void DialogueBox::setFont(sf::Font const & font) {
     line.setFont(font);
+}
+
+void DialogueBox::setNextLine(pugi::xml_node& node) {
+    if (node.next_sibling()) {
+        node = node.next_sibling();
+        line.setCharacterSize(node.attribute("CharacterSize").as_int());
+        line.setFillColor(getColorFromString(node.attribute("TextColor").as_string()));
+        line.setString(node.attribute("string").as_string());
+    }
+   
 }
