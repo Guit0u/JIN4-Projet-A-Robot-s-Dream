@@ -74,13 +74,14 @@ int myMain()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+				dialogue.setNextLine(currNode);
+			}
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 		{
 			loadLevel(world, level, player, "resources/leveltest.xml");
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-			dialogue.setNextLine(currNode);
 
 		player.processInput();
 
