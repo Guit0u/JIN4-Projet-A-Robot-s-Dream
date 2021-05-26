@@ -7,20 +7,20 @@ void Level::load(b2World& world, pugi::xml_node node)
 
 	for (auto child : node.children())
 	{
-		if (child.name() == "StaticElement")
+		if (strcmp("StaticElement", child.name()) == 0 )
 		{
 			addStaticElement(world,
-				b2Vec2(node.attribute("posX").as_float(), node.attribute("poxY").as_float()),
-				b2Vec2(node.attribute("sizeX").as_float(), node.attribute("sizeY").as_float()),
-				node.attribute("color").value());
+				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+				child.attribute("color").value());
 		}
-		else if (child.name() == "DynamicElement")
+		else if (strcmp("DynamicElement", child.name()) == 0 )
 		{
 			addDynamicElement(world,
-				b2Vec2(node.attribute("posX").as_float(), node.attribute("poxY").as_float()),
-				b2Vec2(node.attribute("sizeX").as_float(), node.attribute("sizeY").as_float()), 
-				node.attribute("density").as_float(), node.attribute("friction").as_float(),
-				node.attribute("color").value());
+				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+				child.attribute("density").as_float(), child.attribute("friction").as_float(),
+				child.attribute("color").value());
 		}
 	}
 }

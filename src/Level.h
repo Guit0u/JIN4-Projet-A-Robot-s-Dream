@@ -4,6 +4,7 @@
 #include "pugixml.hpp"
 #include <stdio.h>
 #include <vector>
+#include <iostream>
 
 #include "LevelElement.h"
 #include "StaticElement.h"

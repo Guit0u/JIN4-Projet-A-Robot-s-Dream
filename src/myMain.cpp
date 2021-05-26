@@ -13,17 +13,27 @@ int myMain()
 
 	//define level
 	Level level;
-	level.addStaticElement(world, b2Vec2(0.0f, -2.0f), b2Vec2(600.0f, 4.0f), "Blue");
-	level.addDynamicElement(world, b2Vec2(-1.5f, 5.01f), b2Vec2(10.0f, 10.0f), 0.5f, 0.0f, "Magenta");
+
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file("resources/leveltest.xml");
+	if (!result)
+{
+        std::cerr << "Could not open file leveltest.xml because " << result.description() << std::endl;
+        return 1;
+}
+	pugi::xml_node levelData = doc.child("LevelData");
+
+	level.load(world, levelData.child("Level"));
+	
 
 	//define player
-	Player player(world, b2Vec2(0.0f, 20.0f));
+	pugi::xml_node playerNode = levelData.child("Player");
+	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
+	Player player(world, playerPos);
 
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
 	window.setFramerateLimit(60);
-
-
 
 
 
