@@ -14,8 +14,8 @@ public:
 	explicit Level() = default;
 
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
-	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size);
-	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction);
+	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, sf::Color color);
+	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, sf::Color color);
 
 private:
 	std::vector<std::unique_ptr<LevelElement>> elements;

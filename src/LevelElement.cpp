@@ -1,9 +1,8 @@
 #include "LevelElement.h"
 
 
-LevelElement::LevelElement(float const width, float const height) :
-	width(width),
-	height(height)
+LevelElement::LevelElement(sf::Color color) :
+	color(color)
 {
 }
 
@@ -35,7 +34,7 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 		convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
 	}
 	convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
-	convex.setFillColor(sf::Color::Green);
+	convex.setFillColor(color);
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
 	window.draw(convex);
