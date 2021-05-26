@@ -12,4 +12,6 @@ Architecture du projet - choisir design/game programming pattern
 Dépatouiller le cmake
 Concepts arts
 
-Réu demain
+~~Réu demain~~
+
+Le webhook fonctionne
