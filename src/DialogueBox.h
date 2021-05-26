@@ -5,13 +5,15 @@
 #include <string>
 class DialogueBox {
 public:
-	explicit DialogueBox(pugi::xml_node const &node,sf::RenderWindow &window);
+	explicit DialogueBox() = default;
+	void load(pugi::xml_node const &node,sf::RenderWindow &window);
 	void display(sf::RenderWindow &window);
 	sf::Text getText();
 	void setFont(sf::Font const& font);
-	void setNextLine(pugi::xml_node &node);
+	void setNextLine();
 
 private :
 	sf::Text line;
 	sf::RectangleShape background;
+	pugi::xml_node currNode;
 };

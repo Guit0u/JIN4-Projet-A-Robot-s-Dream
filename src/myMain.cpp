@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
+void loadLevel(b2World& world, Level& level, Player& player,DialogueBox &dialogue, sf::RenderWindow &window, char* fileName)
 {
 	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(fileName);
@@ -23,11 +23,18 @@ void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
 	pugi::xml_node playerNode = levelData.child("Player");
 	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
 	player.setposition(playerPos);
+
+	//add dilaogue and set font
+	pugi::xml_node currNode(levelData.child("dialogue").first_child());
+	dialogue.load(currNode, window);
 }
 
 int myMain()
 {
-	
+	//define window
+	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
+	window.setFramerateLimit(60);
+
 	// Define box2d world
 	b2Vec2 gravity(0.0f, -20.0f);
 	b2World world(gravity);
@@ -38,12 +45,21 @@ int myMain()
 	//define player
 	Player player(world, { 0.0f, 0.0f });
 
-	loadLevel(world, level, player, "resources/leveltest.xml");
+	DialogueBox dialogue;
 
-	//define window
-	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
-	window.setFramerateLimit(60);
+	loadLevel(world, level, player, dialogue, window, "resources/leveltest.xml");
 
+	//set Font because it won't work outside myMain()
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file("resources/leveltest.xml");
+	pugi::xml_node levelData = doc.child("LevelData");
+	sf::Font font;
+	if (!font.loadFromFile(levelData.child("dialogue").attribute("FontFile").as_string())) {
+		cout << "assassin de la police" << endl;
+		exit(1);
+	}
+	dialogue.setFont(font);
+	
 
 
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
@@ -53,19 +69,7 @@ int myMain()
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
-	//add dilaogue and set font
-	pugi::xml_document doc;
-	doc.load_file("resources/test_dialogue.xml");
-	pugi::xml_node currNode(doc.first_child().first_child());
-	DialogueBox dialogue(doc.first_child().first_child(), window);
-
-	sf::Font font;
-	if (!font.loadFromFile(doc.first_child().attribute("FontFile").as_string())) {
-		cout << "assassin de la police" << endl;
-		exit(1);
-	}
-	dialogue.setFont(font);
-
+	
 	while (window.isOpen())
 	{
 		//input
@@ -75,14 +79,15 @@ int myMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-				dialogue.setNextLine(currNode);
+				dialogue.setNextLine();
 			}
-		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-		{
-			loadLevel(world, level, player, "resources/leveltest.xml");
-		}
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
+			{
+				loadLevel(world, level, player, dialogue, window, "resources/leveltest.xml");
+			}
 
+		}
+		
 		player.processInput();
 
 		//physique
