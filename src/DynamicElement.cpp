@@ -1,6 +1,6 @@
 #include "DynamicElement.h"
 
-DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, sf::Color color) :
+DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color) :
 	LevelElement(color)
 {
 	b2BodyDef bodyDef;

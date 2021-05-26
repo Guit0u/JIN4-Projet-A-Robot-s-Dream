@@ -63,6 +63,13 @@ void Player::processInput()
 	}
 }
 
+
+void Player::setposition(b2Vec2 pos)
+{
+	body->SetTransform(pos,0.0f);
+}
+
+
 void Player::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
 	b2Fixture* fixture = body->GetFixtureList();

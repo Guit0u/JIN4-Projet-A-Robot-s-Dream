@@ -1,6 +1,6 @@
 #include "StaticElement.h"
 
-StaticElement::StaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, sf::Color color) :
+StaticElement::StaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color) :
 	LevelElement(color)
 {
 	b2BodyDef bodyDef;

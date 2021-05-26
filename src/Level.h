@@ -1,6 +1,7 @@
 #pragma once
 #include "box2d/box2d.h"
 #include "SFML/Graphics.hpp"
+#include "pugixml.hpp"
 #include <stdio.h>
 #include <vector>
 
@@ -13,9 +14,11 @@ class Level
 public:
 	explicit Level() = default;
 
+	void load(b2World& world, pugi::xml_node node);
+
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
-	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, sf::Color color);
-	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, sf::Color color);
+	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
+	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color);
 
 private:
 	std::vector<std::unique_ptr<LevelElement>> elements;

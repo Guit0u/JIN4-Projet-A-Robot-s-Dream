@@ -6,7 +6,7 @@
 class LevelElement
 {
 public:
-	explicit LevelElement(sf::Color color);
+	explicit LevelElement(std::string const& color);
 	virtual ~LevelElement() = default;
 
 	b2Body* getBodypointer();
@@ -16,5 +16,5 @@ public:
 
 private:
 	b2Body* body = nullptr;
-	sf::Color color;
+	std::string color;
 };

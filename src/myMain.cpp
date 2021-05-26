@@ -13,8 +13,8 @@ int myMain()
 
 	//define level
 	Level level;
-	level.addStaticElement(world, b2Vec2(0.0f, -2.0f), b2Vec2(600.0f, 4.0f), sf::Color::Blue);
-	level.addDynamicElement(world, b2Vec2(-1.5f, 5.01f), b2Vec2(10.0f, 10.0f), 0.5f, 0.0f, sf::Color::Magenta);
+	level.addStaticElement(world, b2Vec2(0.0f, -2.0f), b2Vec2(600.0f, 4.0f), "Blue");
+	level.addDynamicElement(world, b2Vec2(-1.5f, 5.01f), b2Vec2(10.0f, 10.0f), 0.5f, 0.0f, "Magenta");
 
 	//define player
 	Player player(world, b2Vec2(0.0f, 20.0f));

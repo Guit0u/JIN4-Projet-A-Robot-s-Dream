@@ -15,12 +15,13 @@ public:
 	explicit Player(b2World& world, b2Vec2 pos);
 
 	void processInput();
+	void setposition(b2Vec2 pos);
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
 private:
 	b2Body* body;
 
-	enum PlayerState
+	enum class PlayerState
 	{
 		onGroud,
 		jump,
