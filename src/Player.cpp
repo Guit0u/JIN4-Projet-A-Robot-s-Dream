@@ -67,6 +67,7 @@ void Player::processInput()
 void Player::setposition(b2Vec2 pos)
 {
 	body->SetTransform(pos,0.0f);
+	body->SetLinearVelocity({ 0.0f,0.0f });
 }
 
 

@@ -6,7 +6,8 @@ LevelElement::LevelElement(std::string const& color) :
 {
 }
 
-b2Body* LevelElement::getBodypointer()
+
+b2Body* LevelElement::getBodyPointer()
 {
 	return body;
 }

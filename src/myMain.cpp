@@ -4,6 +4,26 @@
 #define windowHeight 800
 #define windowWidth 800
 
+
+void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
+{
+	pugi::xml_document doc;
+	pugi::xml_parse_result result = doc.load_file(fileName);
+	if (!result)
+	{
+        std::cerr << "Could not open file leveltest.xml because " << result.description() << std::endl;
+        return;
+	}
+	pugi::xml_node levelData = doc.child("LevelData");
+
+	level.load(world, levelData.child("Level"));
+
+	pugi::xml_node playerNode = levelData.child("Player");
+	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
+	player.setposition(playerPos);
+}
+
+
 int myMain()
 {
 	
@@ -14,22 +34,10 @@ int myMain()
 	//define level
 	Level level;
 
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file("resources/leveltest.xml");
-	if (!result)
-{
-        std::cerr << "Could not open file leveltest.xml because " << result.description() << std::endl;
-        return 1;
-}
-	pugi::xml_node levelData = doc.child("LevelData");
-
-	level.load(world, levelData.child("Level"));
-	
-
 	//define player
-	pugi::xml_node playerNode = levelData.child("Player");
-	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
-	Player player(world, playerPos);
+	Player player(world, { 0.0f, 0.0f });
+
+	loadLevel(world, level, player, "resources/leveltest.xml");
 
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
@@ -53,6 +61,10 @@ int myMain()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+		{
+			loadLevel(world, level, player, "resources/leveltest.xml");
 		}
 
 		player.processInput();

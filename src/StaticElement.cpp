@@ -12,5 +12,5 @@ StaticElement::StaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	bodyShape.SetAsBox(size.x / 2, size.y / 2);
 
 
-	getBodypointer()->CreateFixture(&bodyShape, 0.0f);
+	getBodyPointer()->CreateFixture(&bodyShape, 0.0f);
 }

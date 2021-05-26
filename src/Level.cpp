@@ -3,6 +3,10 @@
 
 void Level::load(b2World& world, pugi::xml_node node)
 {
+	for (size_t i = 0; i < elements.size(); i++)
+	{
+		world.DestroyBody(elements[i]->getBodyPointer());
+	}
 	elements.clear();
 
 	for (auto child : node.children())

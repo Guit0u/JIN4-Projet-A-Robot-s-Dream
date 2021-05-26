@@ -17,5 +17,5 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 	bodyFixtureDef.density = density;
 	bodyFixtureDef.friction = friction;
 
-	getBodypointer()->CreateFixture(&bodyFixtureDef);
+	getBodyPointer()->CreateFixture(&bodyFixtureDef);
 }

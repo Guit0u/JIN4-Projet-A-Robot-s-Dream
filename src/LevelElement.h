@@ -9,7 +9,7 @@ public:
 	explicit LevelElement(std::string const& color);
 	virtual ~LevelElement() = default;
 
-	b2Body* getBodypointer();
+	b2Body* getBodyPointer();
 	void setBodyPointer(b2Body* ptr);
 
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
