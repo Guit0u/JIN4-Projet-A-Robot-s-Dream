@@ -1,0 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf">
+<Line1 TextColor="Green" CharacterSize="24"  BackColor = "Black" BackOutlineColor = "Blue" string = "Blip bloup je suis un robot" />
+<Line2 TextColor="Green" CharacterSize="24"  BackColor = "Black" BackOutlineColor = "Blue" string = "Blip bloup tu veux etre mon ami ?" />
+<Line3 TextColor="Green" CharacterSize="24"  BackColor = "Black" BackOutlineColor = "Blue" string = "Blip bloup c'est la fin des dialogues" />
+<dialogue/> 

@@ -24,6 +24,12 @@ void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
 }
 
 
+#include "SFML/Graphics.hpp"
+#include "pugixml.hpp"
+#include "DialogueBox.h"
+
+using namespace std;
+
 int myMain()
 {
 	
@@ -52,6 +58,18 @@ int myMain()
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
+	//add dilaogue and set font
+	pugi::xml_document doc;
+	doc.load_file("resources/test_dialogue.xml");
+	pugi::xml_node currNode(doc.first_child().first_child());
+	DialogueBox dialogue(doc.first_child().first_child(), window);
+
+	sf::Font font;
+	if (!font.loadFromFile(doc.first_child().attribute("FontFile").as_string())) {
+		cout << "assassin de la police" << endl;
+		exit(1);
+	}
+	dialogue.setFont(font);
 
 	while (window.isOpen())
 	{
@@ -66,6 +84,8 @@ int myMain()
 		{
 			loadLevel(world, level, player, "resources/leveltest.xml");
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+			dialogue.setNextLine(currNode);
 
 		player.processInput();
 
@@ -78,6 +98,7 @@ int myMain()
 
 		player.draw(window, { -400.0f, -400.0f });
 		level.draw(window, { -400.0f, -400.0f });
+		dialogue.display(window);
 		window.display();
 	}
 	
