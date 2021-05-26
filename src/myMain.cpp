@@ -17,7 +17,7 @@ int myMain()
 	level.addDynamicElement(world, b2Vec2(-1.5f, 5.01f), b2Vec2(10.0f, 10.0f), 0.5f, 0.0f);
 
 	//define player
-	Player player(world);
+	Player player(world, b2Vec2(0.0f, 20.0f));
 
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");

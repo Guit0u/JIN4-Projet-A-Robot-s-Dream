@@ -12,7 +12,7 @@
 class Player
 {
 public:
-	explicit Player(b2World& world);
+	explicit Player(b2World& world, b2Vec2 pos);
 
 	void processInput();
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
@@ -23,7 +23,8 @@ private:
 	enum PlayerState
 	{
 		onGroud,
-		inAir
+		jump,
+		fall
 	};
 	PlayerState playerState = PlayerState::onGroud;
 	float lastY = 20;

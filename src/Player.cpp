@@ -1,11 +1,11 @@
 #include "Player.h"
 
 
-Player::Player(b2World& world) 
+Player::Player(b2World& world, b2Vec2 pos) 
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(0.0f, 20.0f);
+	bodyDef.position.Set(pos.x, pos.y);
 
 	body = world.CreateBody(&bodyDef);
 
@@ -22,14 +22,17 @@ Player::Player(b2World& world)
 
 void Player::processInput()
 {
-	if (lastY != body->GetPosition().y)
-	{
-		playerState = PlayerState::inAir;
-	}
-	else
+
+
+	if (lastY == body->GetPosition().y && playerState == PlayerState::fall)
 	{
 		playerState = PlayerState::onGroud;
 	}
+	else if (lastY > body->GetPosition().y)
+	{
+		playerState = PlayerState::fall;
+	}
+
 	lastY = body->GetPosition().y;
 
 
@@ -48,6 +51,7 @@ void Player::processInput()
 	{
 		b2Vec2 impulse(0.0f, verticalInputIntesity);
 		body->ApplyForceToCenter(impulse, true);
+		playerState = PlayerState::jump;
 	}
 
 	b2Vec2 velocity = body->GetLinearVelocity();
