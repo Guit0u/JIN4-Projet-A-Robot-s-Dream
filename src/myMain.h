@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <iostream>
 
+#include "DialogueBox.h"
 #include "Player.h"
 #include "Level.h"
 

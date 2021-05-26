@@ -5,6 +5,8 @@
 #define windowWidth 800
 
 
+using namespace std;
+
 void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
 {
 	pugi::xml_document doc;
@@ -22,13 +24,6 @@ void loadLevel(b2World& world, Level& level, Player& player, char* fileName)
 	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
 	player.setposition(playerPos);
 }
-
-
-#include "SFML/Graphics.hpp"
-#include "pugixml.hpp"
-#include "DialogueBox.h"
-
-using namespace std;
 
 int myMain()
 {
