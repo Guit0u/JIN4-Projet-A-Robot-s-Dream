@@ -7,9 +7,11 @@
 
 using namespace std;
 
+pugi::xml_document doc;
+
 void loadLevel(b2World& world, Level& level, Player& player,DialogueBox &dialogue, sf::RenderWindow &window, char* fileName)
 {
-	pugi::xml_document doc;
+	
 	pugi::xml_parse_result result = doc.load_file(fileName);
 	if (!result)
 	{
@@ -25,7 +27,7 @@ void loadLevel(b2World& world, Level& level, Player& player,DialogueBox &dialogu
 	player.setposition(playerPos);
 
 	//add dilaogue and set font
-	pugi::xml_node currNode(levelData.child("dialogue").first_child());
+	pugi::xml_node currNode(levelData.child("dialogue"));
 	dialogue.load(currNode, window);
 }
 
@@ -49,19 +51,7 @@ int myMain()
 
 	loadLevel(world, level, player, dialogue, window, "resources/leveltest.xml");
 
-	//set Font because it won't work outside myMain()
-	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file("resources/leveltest.xml");
-	pugi::xml_node levelData = doc.child("LevelData");
-	sf::Font font;
-	if (!font.loadFromFile(levelData.child("dialogue").attribute("FontFile").as_string())) {
-		cout << "assassin de la police" << endl;
-		exit(1);
-	}
-	dialogue.setFont(font);
 	
-
-
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
 	// second (60Hz) and 10 iterations. This provides a high quality simulation
 	// in most game scenarios.

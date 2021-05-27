@@ -32,11 +32,27 @@ sf::Color getColorFromString(string s) {
 
 
 void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
-	line.setCharacterSize(node.attribute("CharacterSize").as_int());
-    line.setFillColor(getColorFromString(node.attribute("TextColor").as_string()));	
-    line.setString(node.attribute("string").as_string());
-    line.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
 
+    lines.clear();
+    currentLine = 0;
+
+    auto currNode = node.first_child();
+
+    if (!font.loadFromFile(node.attribute("FontFile").as_string())){
+        cout << "assassin de la police" << endl;
+            exit(1);
+    }
+
+    while(currNode) {
+        auto p = make_unique<sf::Text>();
+        p->setCharacterSize(currNode.attribute("CharacterSize").as_int());
+        p->setFillColor(getColorFromString(currNode.attribute("TextColor").as_string()));
+        p->setString(currNode.attribute("string").as_string());
+        p->setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
+        p->setFont(font);
+        lines.push_back(move(p));
+        currNode = currNode.next_sibling();
+    }
 
     background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
     background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
@@ -44,28 +60,20 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
     background.setPosition(sf::Vector2f{10.f,window.getSize().y * 0.66f });
     background.setSize(sf::Vector2f{window.getSize().x-20.f, window.getSize().y*0.33f-10.f});
 
-    currNode = node;
+    
+    
 }
 
 void DialogueBox::display(sf::RenderWindow& window) {
     window.draw(background);
-    window.draw(line);
+    window.draw(*lines.at(currentLine).get());
 }
 
-sf::Text DialogueBox::getText() {
-    return line;
-}
-
-void DialogueBox::setFont(sf::Font const & font) {
-    line.setFont(font);
+sf::Text* DialogueBox::getText() {
+    return lines.at(currentLine).get();
 }
 
 void DialogueBox::setNextLine() {
-    if (currNode.next_sibling()) {
-        currNode = currNode.next_sibling();
-        line.setCharacterSize(currNode.attribute("CharacterSize").as_int());
-        line.setFillColor(getColorFromString(currNode.attribute("TextColor").as_string()));
-        line.setString(currNode.attribute("string").as_string());
-    }
-   
+    if(currentLine<lines.size()-1)
+        currentLine++;
 }
