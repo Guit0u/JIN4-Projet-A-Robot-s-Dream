@@ -7,11 +7,9 @@
 
 using namespace std;
 
-pugi::xml_document doc;
-
-void loadLevel(b2World& world, Level& level, Player& player,DialogueBox &dialogue, sf::RenderWindow &window, char* fileName)
+void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &window, char* fileName)
 {
-	
+	pugi::xml_document doc;
 	pugi::xml_parse_result result = doc.load_file(fileName);
 	if (!result)
 	{
@@ -20,15 +18,12 @@ void loadLevel(b2World& world, Level& level, Player& player,DialogueBox &dialogu
 	}
 	pugi::xml_node levelData = doc.child("LevelData");
 
-	level.load(world, levelData.child("Level"));
+	level.load(world, levelData,window);
 
 	pugi::xml_node playerNode = levelData.child("Player");
 	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
 	player.setposition(playerPos);
 
-	//add dilaogue and set font
-	pugi::xml_node currNode(levelData.child("dialogue"));
-	dialogue.load(currNode, window);
 }
 
 int myMain()
@@ -47,9 +42,7 @@ int myMain()
 	//define player
 	Player player(world, { 0.0f, 0.0f });
 
-	DialogueBox dialogue;
-
-	loadLevel(world, level, player, dialogue, window, "resources/leveltest.xml");
+	loadLevel(world, level, player, window, "resources/leveltest.xml");
 
 	
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
@@ -69,11 +62,11 @@ int myMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-				dialogue.setNextLine();
+				level.setNextLine();
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
 			{
-				loadLevel(world, level, player, dialogue, window, "resources/leveltest.xml");
+				loadLevel(world, level, player, window, "resources/leveltest.xml");
 			}
 
 		}
@@ -89,7 +82,6 @@ int myMain()
 
 		player.draw(window, { -400.0f, -400.0f });
 		level.draw(window, { -400.0f, -400.0f });
-		dialogue.display(window);
 		window.display();
 	}
 	

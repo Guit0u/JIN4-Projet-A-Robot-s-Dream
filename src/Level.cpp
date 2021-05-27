@@ -1,7 +1,7 @@
 #include "Level.h"
 
 
-void Level::load(b2World& world, pugi::xml_node node)
+void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 {
 	for (size_t i = 0; i < elements.size(); i++)
 	{
@@ -9,7 +9,9 @@ void Level::load(b2World& world, pugi::xml_node node)
 	}
 	elements.clear();
 
-	for (auto child : node.children())
+	auto levelNode = node.child("Level");
+
+	for (auto child : levelNode.children())
 	{
 		if (strcmp("StaticElement", child.name()) == 0 )
 		{
@@ -27,8 +29,15 @@ void Level::load(b2World& world, pugi::xml_node node)
 				child.attribute("color").value());
 		}
 	}
+
+	auto dialogueNode = node.child("dialogue");
+	dialogue.load(dialogueNode, window);
+
 }
 
+void Level::setNextLine() {
+	dialogue.setNextLine();
+}
 
 void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
@@ -36,6 +45,8 @@ void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffse
 	{
 		elements[i]->draw(window, viewportOffset);
 	}
+
+	dialogue.display(window);
 	
 }
 

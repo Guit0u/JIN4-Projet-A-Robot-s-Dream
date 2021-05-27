@@ -60,8 +60,6 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
     background.setPosition(sf::Vector2f{10.f,window.getSize().y * 0.66f });
     background.setSize(sf::Vector2f{window.getSize().x-20.f, window.getSize().y*0.33f-10.f});
 
-    
-    
 }
 
 void DialogueBox::display(sf::RenderWindow& window) {
