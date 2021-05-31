@@ -61,3 +61,18 @@ void Level::addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& s
 	auto ptr = std::make_unique<DynamicElement>(world, pos, size, density, friction, color);
 	elements.push_back(move(ptr));
 }
+
+void Level::addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId)
+{
+	auto ptr = std::make_unique<PressurePlate>(world, pos, size, color, inputId);
+	elements.push_back(move(ptr));
+}
+
+
+
+
+
+void Level::enigmeInput(int id, int value) const
+{
+	printf("input %d with value %d\n", id, value);
+}

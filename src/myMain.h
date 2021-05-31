@@ -9,5 +9,6 @@
 #include "DialogueBox.h"
 #include "Player.h"
 #include "Level.h"
+#include "ContactListener.h"
 
 int myMain();

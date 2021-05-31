@@ -12,7 +12,7 @@ public:
 	b2Body* getBodyPointer();
 	void setBodyPointer(b2Body* ptr);
 
-	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
+	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
 private:
 	b2Body* body = nullptr;
