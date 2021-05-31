@@ -8,6 +8,7 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
+	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 
@@ -17,9 +18,9 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	b2FixtureDef bodyFixtureDef;
 	bodyFixtureDef.shape = &bodyShape;
 	bodyFixtureDef.isSensor = true;
+	bodyFixtureDef.filter.maskBits = 0xffff;
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
-	getBodyPointer()->SetUserData(this);
 }
 
 

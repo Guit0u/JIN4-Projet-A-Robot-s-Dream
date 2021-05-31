@@ -2,6 +2,7 @@
 #include "box2d/box2d.h"
 #include "Level.h"
 #include "ContactElement.h"
+#include <iostream>
 
 class ContactListener : public b2ContactListener
 {

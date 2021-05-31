@@ -72,7 +72,7 @@ int myMain()
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
 			{
 				loadLevel(world, level, player, window, "resources/leveltest.xml");
-				level.addPressurePlate(world,b2Vec2(-10.0f, 0.1f), b2Vec2(10.0f,2.0f),"Red", 5);
+				level.addPressurePlate(world,b2Vec2(-50.0f, 0.1f), b2Vec2(10.0f,2.0f),"Red", 5);
 			}
 
 		}
