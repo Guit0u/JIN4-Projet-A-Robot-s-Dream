@@ -8,7 +8,7 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
-	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>(this);
+	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>((ContactElement*)this);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 

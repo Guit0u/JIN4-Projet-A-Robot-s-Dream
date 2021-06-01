@@ -36,47 +36,35 @@ void ContactListener::BeginContact(b2Contact* contact)
         
     }
 
-
-
-
-    /*
-    b2BodyUserData bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-    if (bodyUserData.pointer)
-    {
-        printf("beginContactA\n");
-        auto ptr = (ContactElement*)bodyUserData.pointer;
-        ptr->startContact();
-        level->enigmeInput(ptr->getInputId(), ptr->getStateValue());
-    }
-
- 
-    bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-    if (bodyUserData.pointer)
-    {
-        printf("beginContactB\n");
-        auto ptr = (ContactElement*)bodyUserData.pointer;
-        ptr->startContact();
-        level->enigmeInput(ptr->getInputId(), ptr->getStateValue());
-    }
-     */   
 }
 void ContactListener::EndContact(b2Contact* contact)
 {
-    printf("endContact\n");
-    b2BodyUserData bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
-    if (bodyUserData.pointer)
+    if (contact && !contact->IsTouching())
     {
-        auto ptr = (ContactElement*)bodyUserData.pointer;
-        ptr->endContact();
-        level->enigmeInput(ptr->getInputId(), ptr->getStateValue());
-    }
+        b2BodyUserData bodyUserData = contact->GetFixtureA()->GetBody()->GetUserData();
+        if (bodyUserData.pointer)
+        {
+            auto ptrA = (ContactElement*)bodyUserData.pointer;
+            if (ptrA)
+            {
+                printf("endContactA\n");
+                ptrA->endContact();
+                level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+            }
+        }
 
 
-    bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
-    if (bodyUserData.pointer)
-    {
-        auto ptr = (ContactElement*)bodyUserData.pointer;
-        ptr->endContact();
-        level->enigmeInput(ptr->getInputId(), ptr->getStateValue());
+        bodyUserData = contact->GetFixtureB()->GetBody()->GetUserData();
+        if (bodyUserData.pointer)
+        {
+            auto ptrB = (ContactElement*)bodyUserData.pointer;
+            if (ptrB)
+            {
+                printf("endContactB\n");
+                ptrB->endContact();
+                level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+            }
+        }
+
     }
 }
