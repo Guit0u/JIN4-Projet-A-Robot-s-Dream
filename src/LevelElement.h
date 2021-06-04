@@ -11,10 +11,11 @@ public:
 
 	b2Body* getBodyPointer();
 	void setBodyPointer(b2Body* ptr);
+	sf::Color getColor();
 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
-	virtual void interract();
-	virtual bool getState();
+	virtual bool interract(); // used for switch only
+	virtual void setElementState(int id, int state); // used for door only
 
 private:
 	b2Body* body = nullptr;

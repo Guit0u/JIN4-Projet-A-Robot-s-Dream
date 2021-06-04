@@ -15,7 +15,6 @@ void ContactListener::BeginContact(b2Contact* contact)
             auto ptrA = (ContactElement*)bodyUserData.pointer;
             if (ptrA)
             {
-                printf("beginContactA\n");
                 ptrA->startContact();
                 level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
             }
@@ -28,7 +27,6 @@ void ContactListener::BeginContact(b2Contact* contact)
             auto ptrB = (ContactElement*)bodyUserData.pointer;
             if (ptrB)
             {
-                printf("beginContactB\n");
                 ptrB->startContact();
                 level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
             }
@@ -47,7 +45,6 @@ void ContactListener::EndContact(b2Contact* contact)
             auto ptrA = (ContactElement*)bodyUserData.pointer;
             if (ptrA)
             {
-                printf("endContactA\n");
                 ptrA->endContact();
                 level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
             }
@@ -60,7 +57,6 @@ void ContactListener::EndContact(b2Contact* contact)
             auto ptrB = (ContactElement*)bodyUserData.pointer;
             if (ptrB)
             {
-                printf("endContactB\n");
                 ptrB->endContact();
                 level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
             }

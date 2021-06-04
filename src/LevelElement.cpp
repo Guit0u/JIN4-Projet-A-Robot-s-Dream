@@ -41,6 +41,11 @@ sf::Color getColorFromString(std::string const& s) {
 	return sf::Color::Black;
 }
 
+sf::Color LevelElement::getColor()
+{
+	return getColorFromString(color);
+}
+
 void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
 	b2Fixture* fixture = body->GetFixtureList();
@@ -58,12 +63,17 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 		convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
 	}
 	convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
-	convex.setFillColor(getColorFromString(color));
+	convex.setFillColor(getColor());
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
 	window.draw(convex);
 }
 
-void LevelElement::interract() {
-	printf("pas un levier\n");
+bool LevelElement::interract() {
+	return false;
+}
+
+void LevelElement::setElementState(int id, int state)
+{
+	// do nothing by default
 }

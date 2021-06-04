@@ -11,5 +11,4 @@ public:
 	void startContact() override;
 	void endContact() override;
 
-	bool getState() override;
 };

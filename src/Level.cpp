@@ -68,8 +68,14 @@ void Level::addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	elements.push_back(move(ptr));
 }
 
-void Level::addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId) {
-	auto ptr = std::make_unique<Switch>(world, pos, size, color, inputId);
+void Level::addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState) {
+	auto ptr = std::make_unique<Switch>(world, pos, size, color, inputId, nbState);
+	elements.push_back(move(ptr));
+}
+
+void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id)
+{
+	auto ptr = std::make_unique<Door>(world, pos, size, color, id);
 	elements.push_back(move(ptr));
 }
 
@@ -81,8 +87,19 @@ void Level::enigmeInput(int id, int value) const
 }
 
 void Level::checkSwitchs() {
-	for (size_t i = 0; i < elements.size(); i++)
+	for (int i = 0; i < elements.size(); i++)
 	{
-		elements[i]->interract();
+		if (elements[i]->interract())
+		{
+			auto ptr = dynamic_cast<Switch*>(elements[i].get());
+			enigmeInput(ptr->getInputId(), ptr->getStateValue());
+		}
+	}
+}
+
+void Level::openDoor(int id, int state) {
+	for (int i = 0; i < elements.size(); i++)
+	{
+		elements[i]->setElementState(id, state);
 	}
 }

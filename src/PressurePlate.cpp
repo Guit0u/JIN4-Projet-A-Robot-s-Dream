@@ -33,7 +33,3 @@ void PressurePlate::endContact()
 {
 	setStateValue(0);
 }
-
-bool PressurePlate::getState() {
-	return getStateValue();
-}

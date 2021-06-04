@@ -2,9 +2,10 @@
 
 
 
-Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId) :
+Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbStates) :
 	LevelElement(color),
-	ContactElement(inputId)
+	ContactElement(inputId),
+	nbStates(nbStates)
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
@@ -26,25 +27,21 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 
 void Switch::startContact()
 {
-	setStateValue(1);
+	active = true;
 }
 
 void Switch::endContact()
 {
-	setStateValue(0);
+	active = false;
 }
 
-void Switch::interract() 
+bool Switch::interract() 
 {
-	if (getStateValue()) {
-		switchState = !switchState;
-		printf("tu es sur le levier ça fonctionne\n");
+	if (active)
+	{
+		setStateValue((getStateValue() + 1) % nbStates);
+		return true;
 	}
-	else {
-		printf("tu n'es pas sur le levier\n");
-	}
-}
-
-bool Switch::getState() {
-	return switchState;
+	return false;
+	
 }
