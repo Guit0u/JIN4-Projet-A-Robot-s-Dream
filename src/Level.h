@@ -10,6 +10,7 @@
 #include "StaticElement.h"
 #include "DynamicElement.h"
 #include "PressurePlate.h"
+#include "Switch.h"
 #include "DialogueBox.h"
 
 class Level
@@ -24,10 +25,11 @@ public:
 	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
 	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color);
 	void addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
-	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
+	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
 	void addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
 
 	void enigmeInput(int id, int value) const;
+	void checkSwitchs();
 
 private:
 	std::vector<std::unique_ptr<LevelElement>> elements;

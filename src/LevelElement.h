@@ -13,7 +13,7 @@ public:
 	void setBodyPointer(b2Body* ptr);
 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
-
+	virtual void interract();
 private:
 	b2Body* body = nullptr;
 	std::string color;

@@ -63,3 +63,7 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 	convex.setOutlineThickness(0);
 	window.draw(convex);
 }
+
+void LevelElement::interract() {
+	printf("pas un levier\n");
+}
