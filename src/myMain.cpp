@@ -68,7 +68,9 @@ int myMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-				level.setNextLine();
+				if (level.setNextLine()) {
+					gamestate = GameState::gameplay;
+				}
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
 			{
@@ -91,7 +93,8 @@ int myMain()
 
 		if (level.checkEnigme())
 		{
-			printf("succes\n");
+			if (gamestate == GameState::gameplay)
+				level.setNextLine();
 			gamestate = GameState::dialogue;
 		}
 		

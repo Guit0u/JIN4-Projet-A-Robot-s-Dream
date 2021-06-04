@@ -35,8 +35,8 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 
 }
 
-void Level::setNextLine() {
-	dialogue.setNextLine();
+bool Level::setNextLine() {
+	return dialogue.setNextLine();
 }
 
 void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)

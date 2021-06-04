@@ -6,8 +6,10 @@
 		<DynamicElement posX="-1.5" posY="5.01" sizeX="10" sizeY="10" density="0.5" friction="0" color="Magenta"/>
 	</Level>
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
+		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
 		<Line1 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
 		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
 		<Line3 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
+		<Line4 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue> 
 </LevelData>

@@ -76,12 +76,18 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 }
 
 void DialogueBox::display(sf::RenderWindow& window) {
-    window.draw(background);
-    window.draw(lines.at(currentLine).get()->first.second);
-    window.draw(lines.at(currentLine).get()->second);
+ 
+        window.draw(background);
+        window.draw(lines.at(currentLine).get()->first.second);
+        window.draw(lines.at(currentLine).get()->second);
+  
 }
 
-void DialogueBox::setNextLine() {
-    if(currentLine<lines.size()-1)
+bool DialogueBox::setNextLine() {
+    if (currentLine < lines.size() - 2) {
         currentLine++;
+        return false;
+    }
+    return true;
+    
 }
