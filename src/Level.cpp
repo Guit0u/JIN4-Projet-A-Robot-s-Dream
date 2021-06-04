@@ -28,6 +28,41 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 				child.attribute("density").as_float(), child.attribute("friction").as_float(),
 				child.attribute("color").value());
 		}
+		else if (strcmp("Door", child.name()) == 0)
+		{
+			addDoor(world,
+				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+				child.attribute("color").value(), child.attribute("id").as_int());
+		}
+		else if (strcmp("PressurePlate", child.name()) == 0)
+		{
+			addPressurePlate(world,
+				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+				child.attribute("color").value(), child.attribute("id").as_int());
+		}
+		else if (strcmp("Switch", child.name()) == 0)
+		{
+			addSwitch(world,
+				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+				child.attribute("color").value(), child.attribute("id").as_int(),
+				child.attribute("nbStates").as_int());
+		}
+	}
+
+	auto enigmeNode = node.child("Enigme");
+	for (auto child : enigmeNode.children())
+	{
+		printf("load new enigme\n");
+		if (strcmp("EnigmeLink", child.name()) == 0)
+		{
+			printf("load new enigmeLink\n");
+			addEnigmeLink(child.attribute("inputId").as_int(),
+				child.attribute("condValue").as_int(),
+				child.attribute("outputId").as_int());
+		}
 	}
 
 	auto dialogueNode = node.child("dialogue");

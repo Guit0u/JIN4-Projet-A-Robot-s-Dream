@@ -3,13 +3,22 @@
 	<Player x="0" y="20"/>
 	<Level>
 		<StaticElement posX="0" posY="-2" sizeX="600" sizeY="4" color="Blue"/>
-		<DynamicElement posX="-1.5" posY="5.01" sizeX="10" sizeY="10" density="0.5" friction="0" color="Magenta"/>
+		<DynamicElement posX="-20" posY="5.01" sizeX="10" sizeY="10" density="0.5" friction="0" color="Magenta"/>
+		<Door posX="-30" posY="10" sizeX="4" sizeY="20" color="Green" id="1"/>
+		<Door posX="30" posY="10" sizeX="4" sizeY="20" color="Green" id="2"/>
+		<PressurePlate posX="-40" posY="0" sizeX="10" sizeY="2" color="Red" id="2"/>
+		<Switch posX="10" posY="5" sizeX="4" sizeY="4" color="Red" id="1" nbStates="4"/>
 	</Level>
+	<Enigme>
+		<EnigmeLink inputId="1" condValue="1" outputId="1"/>
+		<EnigmeLink inputId="2" condValue="3" outputId="2"/>
+	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
 		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
 		<Line1 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
 		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
 		<Line3 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
 		<Line4 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
-	</dialogue> 
+	</dialogue>
+	
 </LevelData>
