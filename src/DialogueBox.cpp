@@ -52,7 +52,7 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
             return;
         }
         p->first.second.setTexture(p->first.first);
-        p->first.second.setScale();
+        p->first.second.setScale(0.75f,0.75f);
         p->first.second.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
 
         p->second.setCharacterSize(currNode.attribute("CharacterSize").as_int());

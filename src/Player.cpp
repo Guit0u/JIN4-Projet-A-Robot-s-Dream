@@ -15,7 +15,7 @@ Player::Player(b2World& world, b2Vec2 pos)
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
 	fixtureDef.density = 0.5f;
-	fixtureDef.friction = 2.0f;
+	fixtureDef.friction = 1.0f;
 
 	body->CreateFixture(&fixtureDef);
 }
