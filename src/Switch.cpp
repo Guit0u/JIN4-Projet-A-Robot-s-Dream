@@ -44,3 +44,7 @@ void Switch::interract()
 		printf("tu n'es pas sur le levier\n");
 	}
 }
+
+bool Switch::getState() {
+	return switchState;
+}

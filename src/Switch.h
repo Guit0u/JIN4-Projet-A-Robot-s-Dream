@@ -12,6 +12,8 @@ public:
 	void endContact() override;
 	void interract() override;
 
+	bool getState() override;
+
 private:
 	bool switchState;
 };

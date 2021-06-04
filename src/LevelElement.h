@@ -14,6 +14,8 @@ public:
 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 	virtual void interract();
+	virtual bool getState();
+
 private:
 	b2Body* body = nullptr;
 	std::string color;
