@@ -11,4 +11,10 @@
 #include "Level.h"
 #include "ContactListener.h"
 
+enum GameState
+{
+	gameplay,
+	dialogue
+};
+
 int myMain();
