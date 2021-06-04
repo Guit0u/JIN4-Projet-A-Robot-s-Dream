@@ -79,11 +79,18 @@ void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::
 	elements.push_back(move(ptr));
 }
 
-
+void Level::addEnigmeLink(int inputId, int condValue, int outputId)
+{
+	auto ptr = std::make_unique<EnigmeLink>(inputId, condValue, outputId);
+	enigmes.push_back(move(ptr));
+}
 
 void Level::enigmeInput(int id, int value) const
 {
-	printf("input %d with value %d\n", id, value);
+	for (int i = 0; i < enigmes.size(); i++)
+	{
+		enigmes[i]->inputEvent(id, value);
+	}
 }
 
 void Level::checkSwitchs() {
@@ -102,4 +109,21 @@ void Level::openDoor(int id, int state) {
 	{
 		elements[i]->setElementState(id, state);
 	}
+}
+
+bool Level::checkEnigme()
+{
+	for (int i = 0; i < enigmes.size(); i++)
+	{
+		if (enigmes[i]->hasChanged())
+		{
+			openDoor(enigmes[i]->getDoor(), enigmes[i]->isResolved());
+		}
+	}
+	
+	if (enigmes.empty() || enigmes[enigmes.size() - 1]->isResolved())
+	{
+		return true;
+	}
+	return false;
 }
