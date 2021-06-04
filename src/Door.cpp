@@ -48,6 +48,6 @@ void Door::setElementState(int inId, int state)
 	{
 		open = state;
 	}
-	getBodyPointer()->SetAwake(open);
+	getBodyPointer()->SetEnabled(!open);
 		
 }

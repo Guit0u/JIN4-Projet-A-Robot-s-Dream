@@ -73,7 +73,8 @@ int myMain()
 			{
 				loadLevel(world, level, player, window, "resources/leveltest.xml");
 				level.addPressurePlate(world,b2Vec2(-50.0f, 0.1f), b2Vec2(10.0f,2.0f),"Red", 5);
-				level.addSwitch(world, b2Vec2(100.0f, 1.0f), b2Vec2(5.0f, 30.0f), "Red", 3, 4);
+				level.addDoor(world, b2Vec2(100.0f, 1.0f), b2Vec2(5.0f, 30.0f), "Red", 3);
+				level.addEnigmeLink(5, 1, 3);
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
 				level.checkSwitchs();
@@ -82,7 +83,10 @@ int myMain()
 		}
 		
 		player.processInput();
-
+		if (level.checkEnigme())
+		{
+			printf("succes\n");
+		}
 		//physique
 		world.Step(timeStep, velocityIterations, positionIterations);
 

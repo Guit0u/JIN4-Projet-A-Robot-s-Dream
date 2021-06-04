@@ -6,7 +6,7 @@ Enigme::Enigme(int doorId) :
 
 bool Enigme::isResolved() const
 {
-	return isResolved;
+	return resolved;
 }
 
 bool Enigme::hasChanged()
