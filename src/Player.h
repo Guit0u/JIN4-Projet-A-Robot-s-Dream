@@ -7,7 +7,7 @@
 #define playerHight 10
 #define maxSpeed 100
 #define horizontalInpulseIntensity 5000
-#define verticalInputIntesity 150000
+#define verticalInputIntesity 200000
 
 class Player
 {

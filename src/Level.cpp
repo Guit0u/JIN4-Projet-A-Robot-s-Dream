@@ -103,3 +103,20 @@ void Level::openDoor(int id, int state) {
 		elements[i]->setElementState(id, state);
 	}
 }
+
+bool Level::checkEnigme()
+{
+	for (int i = 0; i < enigmes.size(); i++)
+	{
+		if (enigmes[i]->hasChanged())
+		{
+			openDoor(enigmes[i]->getDoor(), enigmes[i]->isResolved());
+		}
+	}
+	
+	if (enigmes.empty() || enigmes[enigmes.size() - 1]->isResolved())
+	{
+		return true;
+	}
+	return false;
+}

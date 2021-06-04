@@ -33,7 +33,7 @@ int myMain()
 	window.setFramerateLimit(60);
 
 	// Define box2d world
-	b2Vec2 gravity(0.0f, -20.0f);
+	b2Vec2 gravity(0.0f, -100.0f);
 	b2World world(gravity);
 
 	

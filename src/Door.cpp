@@ -46,14 +46,7 @@ void Door::setElementState(int inId, int state)
 {
 	if (inId == id)
 	{
-		if (state == 1)
-		{
-			open = true;
-		}
-		else
-		{
-			open = false;
-		}
+		open = state;
 	}
 	getBodyPointer()->SetAwake(open);
 		
