@@ -10,11 +10,10 @@ public:
 	explicit DialogueBox() = default;
 	void load(pugi::xml_node const &node,sf::RenderWindow &window);
 	void display(sf::RenderWindow &window);
-	sf::Text* getText();
 	void setNextLine();
 
 private :
-	std::vector<std::unique_ptr<sf::Text>> lines;
+	std::vector<std::unique_ptr<std::pair<std::pair<sf::Texture,sf::Sprite>,sf::Text>>> lines;
 	sf::RectangleShape background;
 	sf::Font font;
 	int currentLine = 0;
