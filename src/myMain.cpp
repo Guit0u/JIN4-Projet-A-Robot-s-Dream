@@ -28,6 +28,7 @@ void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &w
 
 int myMain()
 {
+	GameState gamestate = GameState::gameplay;
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
 	window.setFramerateLimit(60);
@@ -66,7 +67,7 @@ int myMain()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
 				level.setNextLine();
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
@@ -75,18 +76,25 @@ int myMain()
 				level.addPressurePlate(world,b2Vec2(-50.0f, 0.1f), b2Vec2(10.0f,2.0f),"Red", 5);
 				level.addDoor(world, b2Vec2(100.0f, 1.0f), b2Vec2(5.0f, 30.0f), "Red", 3);
 				level.addEnigmeLink(5, 1, 3);
+				gamestate = GameState::gameplay;
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
 				level.checkSwitchs();
 			}
 
 		}
-		
-		player.processInput();
+
+		if (gamestate == GameState::gameplay)
+		{
+			player.processInput();
+		}
+
 		if (level.checkEnigme())
 		{
 			printf("succes\n");
+			gamestate = GameState::dialogue;
 		}
+		
 		//physique
 		world.Step(timeStep, velocityIterations, positionIterations);
 
