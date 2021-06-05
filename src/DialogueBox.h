@@ -11,6 +11,7 @@ public:
 	void load(pugi::xml_node const &node,sf::RenderWindow &window);
 	void display(sf::RenderWindow &window);
 	bool setNextLine();
+	void resetDialogue();
 
 private :
 	std::vector<std::unique_ptr<std::pair<std::pair<sf::Texture,sf::Sprite>,sf::Text>>> lines;
