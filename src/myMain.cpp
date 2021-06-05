@@ -48,7 +48,7 @@ int myMain()
 	//define player
 	Player player(world, { 0.0f, 0.0f });
 
-	loadLevel(world, level, player, window, "resources/leveltest.xml");
+	loadLevel(world, level, player, window, "resources/leveltuyau.xml");
 
 	
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
@@ -68,13 +68,13 @@ int myMain()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-				if (level.setNextLine()) {
+				if(level.setNextLine()) {
 					gamestate = GameState::gameplay;
 				}
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
 			{
-				loadLevel(world, level, player, window, "resources/leveltest.xml");
+				loadLevel(world, level, player, window, "resources/leveltuyau.xml");
 				gamestate = GameState::gameplay;
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {

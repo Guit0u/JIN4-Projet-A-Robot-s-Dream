@@ -1,5 +1,6 @@
 #pragma once
 #include "pugixml.hpp"
+#include "SFML/Graphics.hpp"
 
 class Enigme
 {
@@ -12,6 +13,7 @@ public:
 	bool isResolved() const;
 	void setResolved(bool isresolved);
 	int getDoor() const;
+	virtual void draw(sf::RenderWindow& window) = 0;
 
 private:
 	bool changed = false;

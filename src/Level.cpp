@@ -62,6 +62,9 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 				child.attribute("condValue").as_int(),
 				child.attribute("outputId").as_int());
 		}
+		else if (strcmp("EnigmeTuyaux", child.name()) == 0){
+			addEnigmeTuyaux(child.attribute("output").as_int(),child);
+		}
 	}
 
 	auto dialogueNode = node.child("dialogue");
@@ -116,6 +119,30 @@ void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::
 void Level::addEnigmeLink(int inputId, int condValue, int outputId)
 {
 	auto ptr = std::make_unique<EnigmeLink>(inputId, condValue, outputId);
+	enigmes.push_back(move(ptr));
+}
+
+void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
+	auto ptr = std::make_unique<EnigmeTuyaux>(outputId);
+	for (auto child : node.children())
+	{
+		if (strcmp("TuyauFixe", child.name()) == 0)
+		{
+			ptr->addTuyauFixe(child.attribute("type").as_string(),
+				child.attribute("orientation").as_int(),
+				std::pair<int, int>{child.attribute("x").as_int(),child.attribute("y").as_int()});
+		}
+		else if (strcmp("TuyauMobile", child.name()) == 0) {
+			std::vector<int> switchs;
+			for(auto childSwitch : child.children()){
+				switchs.push_back(childSwitch.attribute("id").as_int());
+			}
+			ptr->addTuyauMobile(child.attribute("type").as_string(),
+				child.attribute("orientation").as_int(),
+				std::pair<int, int>{child.attribute("x").as_int(), child.attribute("y").as_int()},
+				switchs);
+		}
+	}
 	enigmes.push_back(move(ptr));
 }
 

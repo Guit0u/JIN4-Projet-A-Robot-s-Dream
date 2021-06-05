@@ -16,6 +16,7 @@
 #include "DialogueBox.h"
 
 #include "Enigme.h"
+#include "EnigmeTuyaux.h"
 #include "EnigmeLink.h"
 
 class Level
@@ -32,7 +33,7 @@ public:
 	void addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
 	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState);
 	void addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id);
-	
+	void addEnigmeTuyaux(int outputId, pugi::xml_node node);
 	void addEnigmeLink(int inputId, int condValue, int outputId);
 
 	void enigmeInput(int id, int value) const;
