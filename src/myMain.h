@@ -5,6 +5,7 @@
 #include <map>
 #include <stdio.h>
 #include <iostream>
+#include <string>
 
 #include "DialogueBox.h"
 #include "Player.h"

@@ -93,3 +93,9 @@ void Player::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffs
 	convex.setOutlineThickness(0);
 	window.draw(convex);
 }
+
+
+b2Vec2 Player::getPosition() const
+{
+	return body->GetPosition();
+}
