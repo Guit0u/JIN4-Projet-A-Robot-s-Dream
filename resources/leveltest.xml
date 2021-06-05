@@ -10,8 +10,8 @@
 		<Switch posX="10" posY="5" sizeX="4" sizeY="4" color="Red" id="1" nbStates="4"/>
 	</Level>
 	<Enigme>
-		<EnigmeLink inputId="1" condValue="1" outputId="1"/>
-		<EnigmeLink inputId="2" condValue="3" outputId="2"/>
+		<EnigmeLink inputId="1" condValue="3" outputId="1"/>
+		<EnigmeLink inputId="2" condValue="1" outputId="2"/>
 	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
 		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>

@@ -70,6 +70,7 @@ int myMain()
 			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
 				if (level.setNextLine()) {
 					gamestate = GameState::gameplay;
+					level.resetDialogue();
 				}
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)

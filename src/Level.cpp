@@ -74,6 +74,10 @@ bool Level::setNextLine() {
 	return dialogue.setNextLine();
 }
 
+void Level::resetDialogue() {
+	dialogue.resetDialogue();
+}
+
 void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
 	for (size_t i = 0; i < elements.size(); i++)
