@@ -18,4 +18,5 @@ private :
 	sf::RectangleShape background;
 	sf::Font font;
 	int currentLine = 0;
+	bool dialogueRead = false;
 };

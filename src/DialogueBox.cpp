@@ -88,11 +88,7 @@ bool DialogueBox::setNextLine() {
         currentLine++;
         return false;
     }
-    currentLine++;
-    return true;
-    
-}
-
-void DialogueBox::resetDialogue() {
-    currentLine = 0;
+    if (currentLine < lines.size() - 1)
+        currentLine++;
+    return true;    
 }
