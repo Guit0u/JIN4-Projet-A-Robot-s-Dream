@@ -26,10 +26,12 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 
 void PressurePlate::startContact()
 {
+	printf("pressed\n");
 	setStateValue(1);
 }
 
 void PressurePlate::endContact()
 {
+	printf("un pressed\n");
 	setStateValue(0);
 }

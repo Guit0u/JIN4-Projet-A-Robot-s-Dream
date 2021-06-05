@@ -56,10 +56,8 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 	auto enigmeNode = node.child("Enigme");
 	for (auto child : enigmeNode.children())
 	{
-		printf("load new enigme\n");
 		if (strcmp("EnigmeLink", child.name()) == 0)
 		{
-			printf("load new enigmeLink\n");
 			addEnigmeLink(child.attribute("inputId").as_int(),
 				child.attribute("condValue").as_int(),
 				child.attribute("outputId").as_int());

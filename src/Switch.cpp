@@ -27,11 +27,13 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 
 void Switch::startContact()
 {
+	printf("set active\n");
 	active = true;
 }
 
 void Switch::endContact()
 {
+	printf("set inactive\n");
 	active = false;
 }
 
@@ -39,7 +41,9 @@ bool Switch::interract()
 {
 	if (active)
 	{
+		
 		setStateValue((getStateValue() + 1) % nbStates);
+		printf("interact switch, new value : %d\n", getStateValue());
 		return true;
 	}
 	return false;
