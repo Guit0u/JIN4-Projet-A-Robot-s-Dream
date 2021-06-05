@@ -70,7 +70,6 @@ int myMain()
 			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
 				if (level.setNextLine()) {
 					gamestate = GameState::gameplay;
-					level.resetDialogue();
 				}
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
@@ -91,9 +90,8 @@ int myMain()
 
 		if (level.checkEnigme())
 		{
-			if (gamestate == GameState::gameplay)
-				level.setNextLine();
-			gamestate = GameState::dialogue;
+			if (gamestate == GameState::gameplay && !level.setNextLine())
+				gamestate = GameState::dialogue;
 		}
 		
 		//physique
