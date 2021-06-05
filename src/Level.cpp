@@ -151,9 +151,6 @@ bool Level::checkEnigme()
 	{
 		if (enigmes[i]->hasChanged())
 		{
-			printf("nb de l'enigme %d\n", i);
-			printf("affect door %d\n", enigmes[i]->getDoor());
-			printf("set State %d\n", enigmes[i]->isResolved());
 			openDoor(enigmes[i]->getDoor(), enigmes[i]->isResolved());
 		}
 	}
