@@ -15,5 +15,5 @@ public:
 
 private:
 	int nbStates;
-	bool active;
+	bool active = false;
 };

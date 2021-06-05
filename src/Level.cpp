@@ -8,6 +8,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 		world.DestroyBody(elements[i]->getBodyPointer());
 	}
 	elements.clear();
+	enigmes.clear();
 
 	auto levelNode = node.child("Level");
 
@@ -152,6 +153,9 @@ bool Level::checkEnigme()
 	{
 		if (enigmes[i]->hasChanged())
 		{
+			printf("nb de l'enigme %d\n", i);
+			printf("affect door %d\n", enigmes[i]->getDoor());
+			printf("set State %d\n", enigmes[i]->isResolved());
 			openDoor(enigmes[i]->getDoor(), enigmes[i]->isResolved());
 		}
 	}
