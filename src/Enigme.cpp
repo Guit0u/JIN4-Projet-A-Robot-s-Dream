@@ -32,3 +32,7 @@ void Enigme::setResolved(bool isResolved)
 	}
 	resolved = isResolved;
 }
+
+void Enigme::draw(sf::RenderWindow& window) {
+	//do nothing
+}

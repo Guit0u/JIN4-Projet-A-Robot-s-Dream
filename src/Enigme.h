@@ -13,7 +13,7 @@ public:
 	bool isResolved() const;
 	void setResolved(bool isresolved);
 	int getDoor() const;
-	virtual void draw(sf::RenderWindow& window) = 0;
+	virtual void draw(sf::RenderWindow& window);
 
 private:
 	bool changed = false;

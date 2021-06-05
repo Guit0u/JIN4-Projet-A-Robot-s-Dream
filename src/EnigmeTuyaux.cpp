@@ -30,3 +30,7 @@ void EnigmeTuyaux::inputEvent(int id, int value){
 		}
 	}
 }
+
+void EnigmeTuyaux::draw(sf::RenderWindow& window) {
+	//do nothing
+}
