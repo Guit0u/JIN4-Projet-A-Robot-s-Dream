@@ -17,6 +17,7 @@ public:
 	void processInput();
 	void setposition(b2Vec2 pos);
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
+	b2Vec2 getPosition() const;
 
 private:
 	b2Body* body;

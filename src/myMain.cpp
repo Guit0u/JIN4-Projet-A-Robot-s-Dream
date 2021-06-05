@@ -7,13 +7,15 @@
 
 using namespace std;
 
-void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &window, char* fileName)
+void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &window, int levelNumber)
 {
+	std::string stringName = "resources/level" + std::to_string(levelNumber) + ".xml";
+	const char* charName = stringName.c_str();
 	pugi::xml_document doc;
-	pugi::xml_parse_result result = doc.load_file(fileName);
+	pugi::xml_parse_result result = doc.load_file(charName);
 	if (!result)
 	{
-        std::cerr << "Could not open file leveltest.xml because " << result.description() << std::endl;
+        std::cerr << "Could not open file " << stringName << " because " << result.description() << std::endl;
         return;
 	}
 	pugi::xml_node levelData = doc.child("LevelData");
@@ -29,6 +31,8 @@ void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &w
 int myMain()
 {
 	GameState gamestate = GameState::gameplay;
+	int curLevel = 1;
+
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
 	window.setFramerateLimit(60);
@@ -48,7 +52,7 @@ int myMain()
 	//define player
 	Player player(world, { 0.0f, 0.0f });
 
-	loadLevel(world, level, player, window, "resources/leveltest.xml");
+	loadLevel(world, level, player, window, curLevel);
 
 	
 	// Prepare for simulation. Typically we use a time step of 1/60 of a
@@ -74,7 +78,7 @@ int myMain()
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
 			{
-				loadLevel(world, level, player, window, "resources/leveltest.xml");
+				loadLevel(world, level, player, window, curLevel);
 				gamestate = GameState::gameplay;
 			}
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
@@ -104,6 +108,13 @@ int myMain()
 		player.draw(window, { -400.0f, -400.0f });
 		level.draw(window, { -400.0f, -400.0f });
 		window.display();
+
+
+		if (player.getPosition().x > 400)
+		{
+			curLevel++;
+			loadLevel(world, level, player, window, curLevel);
+		}
 	}
 	
 	return 0;
