@@ -6,9 +6,12 @@
 class Tuyau
 {
 public:
-	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const &position);
+	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const& position);
+	explicit Tuyau(int id,std::string const& type, int orientation, std::pair<float, float> const &position);
 	void draw(sf::RenderWindow& window);
 	void rotate(int value);
+	int getId() const;
+	int getOrientation() const;
 private:
 	enum class typeTuyau {
 		droit,
@@ -16,7 +19,8 @@ private:
 		coude,
 		croix,
 	};
-	typeTuyau type;
+	int id = -1;
+	typeTuyau type = typeTuyau::droit;
 	int orientation;
 	std::pair<float,float> position;
 	sf::Texture texture;

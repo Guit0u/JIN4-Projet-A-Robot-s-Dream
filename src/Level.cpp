@@ -144,10 +144,19 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 			for(auto childSwitch : child.children()){
 				switchs.push_back(childSwitch.attribute("id").as_int());
 			}
-			ptr->addTuyauMobile(child.attribute("type").as_string(),
+			ptr->addTuyauMobile(child.attribute("id").as_int(),child.attribute("type").as_string(),
 				child.attribute("orientation").as_int(),
 				std::pair<int, int>{child.attribute("posX").as_float(), child.attribute("posY").as_float()},
 				switchs);
+		}
+		else if (strcmp("Solution", child.name()) == 0) {
+			for (auto tuyauNode : child.children()) {
+				std::vector<int> solutions;
+				for (auto solNode : tuyauNode.children()) {
+					solutions.push_back(solNode.attribute("orientation").as_int());
+				}
+				ptr->addTuyauSolution(tuyauNode.attribute("id").as_int(),solutions);
+			}
 		}
 	}
 	enigmes.push_back(move(ptr));
