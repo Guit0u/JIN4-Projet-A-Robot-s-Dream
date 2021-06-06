@@ -77,8 +77,9 @@ Tuyau::Tuyau(int id,std::string const& typeTuyau, int orientation, std::pair<flo
 int Tuyau::getId() const { return id; }
 int Tuyau::getOrientation() const { return orientation; }
 
-void Tuyau::rotate(int value) {
-	orientation = value;
+void Tuyau::rotate() {
+	orientation++;
+	orientation = orientation % 4;
 	sprite.rotate(90.0f);
 }
 

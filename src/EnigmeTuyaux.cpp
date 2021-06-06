@@ -36,7 +36,7 @@ void EnigmeTuyaux::inputEvent(int id, int value){
 	if (switchToTuyaux.find(id) != switchToTuyaux.end()) {
 		for (size_t i = 0; i < switchToTuyaux[id].size(); i++)
 		{
-			switchToTuyaux[id][i]->rotate(value);
+			switchToTuyaux[id][i]->rotate();
 			updateCurrState(switchToTuyaux[id][i]);	
 			printf("tuyau n°%d ; etat courant : %d ; solution : %d\n", id, currState.at(id), solution.at(id)[0]);
 		}

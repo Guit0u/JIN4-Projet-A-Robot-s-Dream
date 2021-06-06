@@ -16,13 +16,13 @@
 				<Switch id="1"/>
 				<Switch id="2"/>
 			</TuyauMobile>
-			<TuyauMobile id="2" type="coude" orientation="0" posX="127" posY="127">
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
 				<Switch id="1"/>
 			</TuyauMobile>	
 			<Solution>
 				<Tuyau id="1">
-					<Sol orientation="2"/>
-					<Sol orientation="3"/>
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
 				</Tuyau>
 				<Tuyau id="2">
 					<Sol orientation="2"/>

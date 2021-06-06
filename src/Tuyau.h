@@ -9,7 +9,7 @@ public:
 	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const& position);
 	explicit Tuyau(int id,std::string const& type, int orientation, std::pair<float, float> const &position);
 	void draw(sf::RenderWindow& window);
-	void rotate(int value);
+	void rotate();
 	int getId() const;
 	int getOrientation() const;
 private:
