@@ -9,13 +9,15 @@
 		<Switch posX="-10" posY="5" sizeX="4" sizeY="4" color="Red" id="3" nbStates="4"/>
 		<Switch posX="-100" posY="5" sizeX="4" sizeY="4" color="Red" id="4" nbStates="4"/>
 	</Level>
-	<EnigmeTuyaux output="1">
-		<TuyauFixe type="droit" orientation="0" x="0" y="0"/>
-		<TuyauMobile type="coude" orientation="0" x="50" y="50">
-			<Switch id="1"/>
-			<Switch id="2"/>
-		</TuyauMobile>	
-	</EnigmeTuyaux> 
+	<Enigme>
+		<EnigmeTuyaux output="1">
+			<TuyauFixe type="droit" orientation="0" x="0" y="0"/>
+			<TuyauMobile type="droit" orientation="0" x="300" y="300">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>	
+		</EnigmeTuyaux>
+	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
 		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
 		<Line1 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />

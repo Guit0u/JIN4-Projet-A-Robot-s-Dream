@@ -13,6 +13,8 @@ public:
 	int getStateValue() const;
 	void setStateValue(int value);
 
+	virtual bool isPressurePlate();
+
 private:
 	int inputId;
 	int state = 0;

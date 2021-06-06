@@ -16,7 +16,8 @@ void ContactListener::BeginContact(b2Contact* contact)
             if (ptrA)
             {
                 ptrA->startContact();
-                level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                if(ptrA->isPressurePlate())
+                    level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
             }
         }
         
@@ -28,7 +29,8 @@ void ContactListener::BeginContact(b2Contact* contact)
             if (ptrB)
             {
                 ptrB->startContact();
-                level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                if (ptrB->isPressurePlate())
+                    level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
             }
         }
         
@@ -46,7 +48,8 @@ void ContactListener::EndContact(b2Contact* contact)
             if (ptrA)
             {
                 ptrA->endContact();
-                level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                if (ptrA->isPressurePlate())
+                    level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
             }
         }
 
@@ -58,7 +61,8 @@ void ContactListener::EndContact(b2Contact* contact)
             if (ptrB)
             {
                 ptrB->endContact();
-                level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                if (ptrB->isPressurePlate())
+                    level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
             }
         }
 

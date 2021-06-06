@@ -32,5 +32,8 @@ void EnigmeTuyaux::inputEvent(int id, int value){
 }
 
 void EnigmeTuyaux::draw(sf::RenderWindow& window) {
-	//do nothing
+	for (size_t i = 0; i < tuyaux.size(); i++)
+	{
+		tuyaux.at(i)->draw(window);
+	}
 }

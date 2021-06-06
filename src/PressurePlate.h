@@ -11,4 +11,6 @@ public:
 	void startContact() override;
 	void endContact() override;
 
+	bool isPressurePlate() override;
+
 };

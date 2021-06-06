@@ -19,4 +19,5 @@ private :
 	sf::Font font;
 	int currentLine = 0;
 	bool dialogueRead = false;
+
 };

@@ -1,6 +1,7 @@
 #include "Level.h"
 
 
+
 void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 {
 	for (size_t i = 0; i < elements.size(); i++)
@@ -82,6 +83,12 @@ void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffse
 	{
 		elements[i]->draw(window, viewportOffset);
 	}
+
+	for (size_t i = 0; i < enigmes.size(); i++)
+	{
+		enigmes[i]->draw(window);
+	}
+
 
 	dialogue.display(window);
 	

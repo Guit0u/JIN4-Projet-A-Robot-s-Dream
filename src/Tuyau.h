@@ -19,4 +19,6 @@ private:
 	typeTuyau type;
 	int orientation;
 	std::pair<float,float> position;
+	sf::Texture texture;
+	sf::Sprite sprite;
 };
