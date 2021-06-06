@@ -6,7 +6,7 @@
 class Tuyau
 {
 public:
-	explicit Tuyau(std::string const& type, int orientation, std::pair<int, int> const &position);
+	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const &position);
 	void draw(sf::RenderWindow& window);
 	void rotate(int value);
 private:

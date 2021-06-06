@@ -39,7 +39,6 @@ bool Switch::interract()
 {
 	if (active)
 	{
-		printf("paf interaction");
 		setStateValue((getStateValue() + 1) % nbStates);
 		return true;
 	}

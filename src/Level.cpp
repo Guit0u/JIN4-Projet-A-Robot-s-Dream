@@ -137,7 +137,7 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 		{
 			ptr->addTuyauFixe(child.attribute("type").as_string(),
 				child.attribute("orientation").as_int(),
-				std::pair<int, int>{child.attribute("x").as_int(),child.attribute("y").as_int()});
+				std::pair<int, int>{child.attribute("posX").as_float(),child.attribute("posY").as_float()});
 		}
 		else if (strcmp("TuyauMobile", child.name()) == 0) {
 			std::vector<int> switchs;
@@ -146,7 +146,7 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 			}
 			ptr->addTuyauMobile(child.attribute("type").as_string(),
 				child.attribute("orientation").as_int(),
-				std::pair<int, int>{child.attribute("x").as_int(), child.attribute("y").as_int()},
+				std::pair<int, int>{child.attribute("posX").as_float(), child.attribute("posY").as_float()},
 				switchs);
 		}
 	}
