@@ -1,21 +1,24 @@
 #include "Door.h"
 
+constexpr auto WIDTH_FRAME_DOOR = 50;
+constexpr auto HEIGHT_FRAME_DOOR = 50;
+
 Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int id):
 	LevelElement(file),
 	id(id)
 {
 	b2BodyDef bodyDef;
-	bodyDef.position.Set(pos.x, pos.y);
+	bodyDef.position.Set(pos.x, pos.y+HEIGHT_FRAME_DOOR/2);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 
 	b2PolygonShape bodyShape;
-	bodyShape.SetAsBox(texture.getSize().x/2, texture.getSize().y/2);
+	bodyShape.SetAsBox(WIDTH_FRAME_DOOR/2, HEIGHT_FRAME_DOOR/2);
 
 
 	getBodyPointer()->CreateFixture(&bodyShape, 0.0f);
-
-	sprite.setOrigin(-pos.x + texture.getSize().x/2, pos.y + texture.getSize().y/2);
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
+	sprite.setOrigin(-pos.x + WIDTH_FRAME_DOOR, pos.y + HEIGHT_FRAME_DOOR);
 }
 
 void Door::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)

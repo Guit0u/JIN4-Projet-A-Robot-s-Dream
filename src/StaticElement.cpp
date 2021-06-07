@@ -13,5 +13,6 @@ StaticElement::StaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 
 	getBodyPointer()->CreateFixture(&bodyShape, 0.0f);
 
-	sprite.setOrigin(pos.x + texture.getSize().x/2, pos.y);
+	sprite = sf::Sprite(texture);
+	sprite.setOrigin(pos.x + size.x/2, pos.y);
 }

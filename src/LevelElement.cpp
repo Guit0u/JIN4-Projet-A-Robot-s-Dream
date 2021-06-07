@@ -1,13 +1,13 @@
 #include "LevelElement.h"
 #include <iostream>
 
+
 LevelElement::LevelElement(std::string const& textureFile)
 {
 	bool result = texture.loadFromFile(textureFile);
 	if (!result) {
 		std::cerr << "coudl not load file" << std::endl;
 	}
-	sprite.setTexture(texture);
 }
 
 
@@ -70,9 +70,8 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 	convex.setFillColor(sf::Color::Blue);
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
-	//window.draw(convex);
-	sprite.setPosition(sf::Vector2f(body->GetPosition().x-viewportOffset.first, body->GetPosition().y-viewportOffset.second));
-	//std::cout << body->GetPosition().x - viewportOffset.first << "et" << body->GetPosition().y - viewportOffset.second << std::endl;
+	window.draw(convex);
+	sprite.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
 	window.draw(sprite);
 }
 

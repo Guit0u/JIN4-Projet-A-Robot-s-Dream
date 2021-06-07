@@ -1,6 +1,10 @@
 #include "Switch.h"
 #include <iostream>
 
+constexpr auto NB_FRAMES_SWITCH = 2;
+constexpr auto WIDTH_FRAME_SWITCH = 108;
+constexpr auto HEIGHT_FRAME_SWITCH = 55;
+
 
 Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int inputId, int nbStates) :
 	LevelElement(file),
@@ -14,7 +18,7 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 	setBodyPointer(world.CreateBody(&bodyDef));
 
 	b2PolygonShape bodyShape;
-	bodyShape.SetAsBox(texture.getSize().x / 2, texture.getSize().y / 2);
+	bodyShape.SetAsBox(WIDTH_FRAME_SWITCH / 2, HEIGHT_FRAME_SWITCH / 2);
 
 	b2FixtureDef bodyFixtureDef;
 	bodyFixtureDef.shape = &bodyShape;
@@ -22,7 +26,8 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 	bodyFixtureDef.filter.maskBits = 0xffff;
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
-	sprite.setOrigin(-pos.x + texture.getSize().x/2, pos.y + texture.getSize().y);
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
+	sprite.setOrigin(-pos.x+WIDTH_FRAME_SWITCH/2, pos.y + HEIGHT_FRAME_SWITCH);
 }
 
 
@@ -41,8 +46,10 @@ bool Switch::interract()
 	if (active)
 	{
 		setStateValue((getStateValue() + 1) % nbStates);
-		sprite.scale(-1.0f, 1.0f);
-		sprite.setOrigin(sprite.getPosition().x, -sprite.getPosition().y);
+		if(getStateValue()%2==1)
+			sprite.setTextureRect(sf::IntRect(WIDTH_FRAME_SWITCH, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
+		else
+			sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
 		return true;
 	}
 	return false;
