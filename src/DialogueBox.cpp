@@ -48,8 +48,8 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
         background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
         background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
         background.setOutlineThickness(3);
-        background.setPosition(sf::Vector2f{ 3.f,window.getSize().y * 0.70f });
-        background.setSize(sf::Vector2f{ window.getSize().x - 6.f, window.getSize().y * 0.33f - 10.f });
+        background.setPosition(sf::Vector2f{ 3.f,window.getSize().y * 0.70f-1.f });
+        background.setSize(sf::Vector2f{ window.getSize().x - 6.f, window.getSize().y * 0.30f});
 
         auto p = make_unique<std::pair<std::pair<sf::Texture,sf::Sprite>,sf::Text>>();
         bool result = p->first.first.loadFromFile(currNode.attribute("Speaker").as_string());
@@ -72,9 +72,6 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 
         currNode = currNode.next_sibling();
     }
-
-    
-
 }
 
 void DialogueBox::display(sf::RenderWindow& window) {
