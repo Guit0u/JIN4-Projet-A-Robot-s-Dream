@@ -224,3 +224,76 @@ TEST(Initialisation_level, reloadLevel)
     EXPECT_EQ(level.getNbElements(), 0);
     EXPECT_EQ(level.getNbEnigmes(), 0);
 }
+
+TEST(Dynamic_level, dynamicElement)
+{
+    b2Vec2 gravity(0.0f, -10.0f);
+    b2World world(gravity);
+
+    Level level;
+    level.addDynamicElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, 1.0f, 1.0f, "Red");
+
+    float timeStep = 1.0f / 60.0f;
+    int32 velocityIterations = 6;
+    int32 positionIterations = 2;
+    int nbIteration = 5;
+    for (int i = 0; i < nbIteration; i++)
+    {
+        world.Step(timeStep, velocityIterations, positionIterations);
+    }
+
+    LevelElement* elementPtr = level.getElement(0);
+    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
+    b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
+    EXPECT_EQ(pos.x, 2.0f);
+    EXPECT_LT(pos.y, 4.0f);
+}
+
+//Enigmes
+
+TEST(Enigme_link, wrongInput)
+{
+    Level level;
+    level.addEnigmeLink(1, 2, 3);
+    level.enigmeInput(1, 1);
+    EXPECT_FALSE(level.checkEnigme());
+}
+
+TEST(Enigme_link, rightInput)
+{
+    Level level;
+    level.addEnigmeLink(1, 2, 3);
+    level.enigmeInput(1, 2);
+    EXPECT_TRUE(level.checkEnigme());
+}
+
+TEST(Enigme_link, switch_input)
+{
+    b2Vec2 gravity(0.0f, -10.0f);
+    b2World world(gravity);
+
+    Level level;
+    level.addSwitch(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red", 1, 4);
+    level.addEnigmeLink(1, 3, 3);
+
+    auto switchPtr = dynamic_cast<Switch*>(level.getElement(0));
+    auto enigmePtr = dynamic_cast<EnigmeLink*>(level.getEnigme(0));
+
+    switchPtr->startContact();
+    EXPECT_FALSE(level.checkEnigme());
+
+    level.checkSwitchs();
+    EXPECT_FALSE(level.checkEnigme());
+
+    level.checkSwitchs();
+    level.checkSwitchs();
+    EXPECT_TRUE(level.checkEnigme());
+
+    switchPtr->endContact();
+    level.checkSwitchs();
+    EXPECT_TRUE(level.checkEnigme());
+
+    switchPtr->startContact();
+    level.checkSwitchs();
+    EXPECT_FALSE(level.checkEnigme());
+}

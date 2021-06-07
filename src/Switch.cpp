@@ -43,5 +43,4 @@ bool Switch::interract()
 		return true;
 	}
 	return false;
-	
 }
