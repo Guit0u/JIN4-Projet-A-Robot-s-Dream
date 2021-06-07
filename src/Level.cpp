@@ -13,63 +13,70 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 
 	auto levelNode = node.child("Level");
 
-	for (auto child : levelNode.children())
+	if (levelNode)
 	{
-		if (strcmp("StaticElement", child.name()) == 0 )
+		for (auto child : levelNode.children())
 		{
-			addStaticElement(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value());
-		}
-		else if (strcmp("DynamicElement", child.name()) == 0 )
-		{
-			addDynamicElement(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("density").as_float(), child.attribute("friction").as_float(),
-				child.attribute("color").value());
-		}
-		else if (strcmp("Door", child.name()) == 0)
-		{
-			addDoor(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int());
-		}
-		else if (strcmp("PressurePlate", child.name()) == 0)
-		{
-			addPressurePlate(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int());
-		}
-		else if (strcmp("Switch", child.name()) == 0)
-		{
-			addSwitch(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int(),
-				child.attribute("nbStates").as_int());
+			if (strcmp("StaticElement", child.name()) == 0)
+			{
+				addStaticElement(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("color").value());
+			}
+			else if (strcmp("DynamicElement", child.name()) == 0)
+			{
+				addDynamicElement(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("density").as_float(), child.attribute("friction").as_float(),
+					child.attribute("color").value());
+			}
+			else if (strcmp("Door", child.name()) == 0)
+			{
+				addDoor(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("color").value(), child.attribute("id").as_int());
+			}
+			else if (strcmp("PressurePlate", child.name()) == 0)
+			{
+				addPressurePlate(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("color").value(), child.attribute("id").as_int());
+			}
+			else if (strcmp("Switch", child.name()) == 0)
+			{
+				addSwitch(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("color").value(), child.attribute("id").as_int(),
+					child.attribute("nbStates").as_int());
+			}
 		}
 	}
 
 	auto enigmeNode = node.child("Enigme");
-	for (auto child : enigmeNode.children())
+	if (enigmeNode)
 	{
-		if (strcmp("EnigmeLink", child.name()) == 0)
+		for (auto child : enigmeNode.children())
 		{
-			addEnigmeLink(child.attribute("inputId").as_int(),
-				child.attribute("condValue").as_int(),
-				child.attribute("outputId").as_int());
-		}
-		else if (strcmp("EnigmeTuyaux", child.name()) == 0){
-			addEnigmeTuyaux(child.attribute("output").as_int(),child);
+			if (strcmp("EnigmeLink", child.name()) == 0)
+			{
+				addEnigmeLink(child.attribute("inputId").as_int(),
+					child.attribute("condValue").as_int(),
+					child.attribute("outputId").as_int());
+			}
+			else if (strcmp("EnigmeTuyaux", child.name()) == 0) {
+				addEnigmeTuyaux(child.attribute("output").as_int(), child);
+			}
 		}
 	}
 
 	auto dialogueNode = node.child("dialogue");
-	dialogue.load(dialogueNode, window);
+	if(dialogueNode)
+		dialogue.load(dialogueNode, window);
 
 }
 

@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
+#include <string>
 #include "box2d/box2d.h"
 #include "SFML/Graphics.hpp"
-
+#include "pugixml.hpp"
 
 #include "Player.h"
 #include "Level.h"
@@ -155,4 +156,71 @@ TEST(Initialisation_level, addEnigmeLink)
     EXPECT_EQ(level.getNbEnigmes(), 1);
     Enigme* enigmePtr = level.getEnigme(0);
     EXPECT_NO_THROW(dynamic_cast<EnigmeLink*>(enigmePtr));
+}
+
+TEST(Initialisation_level, addEnigmeTuyau)
+{
+    std::string xml = R"(
+        <?xml version="1.0" encoding="UTF-8"?>
+        <EnigmeTuyaux output="1">
+			<TuyauFixe type="droit" orientation="0" posX="0" posY="0"/>
+			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+				<Switch id="1"/>
+			</TuyauMobile>	
+			<Solution>
+				<Tuyau id="1">
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+			</Solution>	
+		</EnigmeTuyaux>)";
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(xml.c_str());
+    EXPECT_NE(0, result);
+
+    Level level;
+    level.addEnigmeTuyaux(1, doc.child("EnigmeTuyaux"));
+    
+    EXPECT_EQ(level.getNbElements(), 0);
+    EXPECT_EQ(level.getNbEnigmes(), 1);
+    Enigme* enigmePtr = level.getEnigme(0);
+    EXPECT_NO_THROW(dynamic_cast<EnigmeTuyaux*>(enigmePtr));
+}
+
+TEST(Initialisation_level, reloadLevel)
+{
+    b2Vec2 gravity(0.0f, -10.0f);
+    b2World world(gravity);
+
+    Level level;
+    level.addStaticElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red");
+    level.addEnigmeLink(1, 2, 3);
+    EXPECT_EQ(level.getNbElements(), 1);
+    EXPECT_EQ(level.getNbEnigmes(), 1);
+
+    std::string xml = R"(<?xml version="1.0" encoding="UTF-8"?>
+    <LevelData>
+	    <Level>
+	    </Level>
+	    <Enigme>
+	    </Enigme>
+    </LevelData>)";
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(xml.c_str());
+    EXPECT_NE(0, result);
+
+    sf::RenderWindow window(sf::VideoMode(800, 800), "tests");
+
+    level.load(world, doc.child("LevelData"), window);
+    EXPECT_EQ(level.getNbElements(), 0);
+    EXPECT_EQ(level.getNbEnigmes(), 0);
 }
