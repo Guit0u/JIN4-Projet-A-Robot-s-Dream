@@ -16,8 +16,11 @@ void ContactListener::BeginContact(b2Contact* contact)
             if (ptrA)
             {
                 ptrA->startContact();
-                if(ptrA->isPressurePlate())
+                auto PPptr = dynamic_cast<PressurePlate*>(ptrA);
+                if (PPptr)
+                {
                     level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                }
             }
         }
         
@@ -29,8 +32,11 @@ void ContactListener::BeginContact(b2Contact* contact)
             if (ptrB)
             {
                 ptrB->startContact();
-                if (ptrB->isPressurePlate())
+                auto PPptr = dynamic_cast<PressurePlate*>(ptrB);
+                if (PPptr)
+                {
                     level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                }
             }
         }
         
@@ -48,8 +54,11 @@ void ContactListener::EndContact(b2Contact* contact)
             if (ptrA)
             {
                 ptrA->endContact();
-                if (ptrA->isPressurePlate())
+                auto PPptr = dynamic_cast<PressurePlate*>(ptrA);
+                if (PPptr)
+                {
                     level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                }
             }
         }
 
@@ -61,8 +70,11 @@ void ContactListener::EndContact(b2Contact* contact)
             if (ptrB)
             {
                 ptrB->endContact();
-                if (ptrB->isPressurePlate())
+                auto PPptr = dynamic_cast<PressurePlate*>(ptrB);
+                if (PPptr)
+                {
                     level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                }
             }
         }
 

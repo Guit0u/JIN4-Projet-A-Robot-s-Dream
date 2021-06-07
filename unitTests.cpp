@@ -411,10 +411,35 @@ TEST(Enigme_tuyaux, switchInput)
     switch1Ptr->startContact();
     level.checkSwitchs();
     EXPECT_FALSE(level.checkEnigme());
-    switch2Ptr->startContact(); // with this the tuyau 1 should retate 2 time. For test only, impossible in-game
+    switch2Ptr->startContact(); // with this the tuyau 1 should retate 2 time.
     level.checkSwitchs();
     switch2Ptr->endContact();
     level.checkSwitchs();
     level.checkSwitchs();
     EXPECT_TRUE(level.checkEnigme());
 }
+
+//Pressure Plate
+
+/*
+TEST(PressurePlate, dynamicActivation)   not working in test but working fine ingame ...
+{
+    b2Vec2 gravity(0.0f, -100.0f);
+    b2World world(gravity);
+    Level level;
+    level.addStaticElement(world, { 0.0f, -2.0f }, { 600.0f, 4.0f }, "Green");
+    level.addPressurePlate(world, { 0.0f, 0.0f }, { 10.0f, 2.0f }, "Red", 1);
+    level.addDynamicElement(world, { 0.0f, 6.0f }, { 1.0f, 1.0f }, 0.5f, 0.0f, "Magenta");
+    level.addEnigmeLink(1, 1, 1);
+
+    float timeStep = 1.0f / 60.0f;
+    int32 velocityIterations = 6;
+    int32 positionIterations = 2;
+    int nbIteration = 75;
+    for (int i = 0; i < nbIteration; i++)
+    {
+        world.Step(timeStep, velocityIterations, positionIterations);
+    }
+    EXPECT_TRUE(level.checkEnigme());
+}
+*/
