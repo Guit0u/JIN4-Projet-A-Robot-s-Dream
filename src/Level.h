@@ -33,6 +33,7 @@ public:
 	void addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
 	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState);
 	void addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id);
+
 	void addEnigmeTuyaux(int outputId, pugi::xml_node node);
 	void addEnigmeLink(int inputId, int condValue, int outputId);
 
@@ -40,6 +41,13 @@ public:
 	bool checkEnigme();
 	void checkSwitchs();
 	void openDoor(int id, int state);
+
+	//methode de tests
+	int getNbElements() const;
+	int getNbEnigmes() const;
+	LevelElement* getElement(int i) const;
+	Enigme* getEnigme(int i) const;
+
 
 private:
 	std::vector<std::unique_ptr<LevelElement>> elements;

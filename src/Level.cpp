@@ -204,3 +204,32 @@ bool Level::checkEnigme()
 	}
 	return false;
 }
+
+
+
+
+//methodes de tests
+
+int Level::getNbElements() const
+{
+	return elements.size();
+}
+
+int Level::getNbEnigmes() const
+{
+	return enigmes.size();
+}
+
+LevelElement* Level::getElement(int i) const
+{
+	if (i < elements.size())
+		return elements[i].get();
+	return nullptr;
+}
+
+Enigme* Level::getEnigme(int i) const
+{
+	if(i < enigmes.size())
+		return enigmes[i].get();
+	return nullptr;
+}
