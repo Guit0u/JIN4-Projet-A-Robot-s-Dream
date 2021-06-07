@@ -20,7 +20,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 			addStaticElement(world,
 				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
 				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value());
+				child.attribute("file").as_string());
 		}
 		else if (strcmp("DynamicElement", child.name()) == 0 )
 		{
@@ -35,7 +35,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 			addDoor(world,
 				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
 				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int());
+				child.attribute("file").as_string(), child.attribute("id").as_int());
 		}
 		else if (strcmp("PressurePlate", child.name()) == 0)
 		{
@@ -49,7 +49,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 			addSwitch(world,
 				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
 				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int(),
+				child.attribute("file").as_string(), child.attribute("id").as_int(),
 				child.attribute("nbStates").as_int());
 		}
 	}
@@ -94,9 +94,9 @@ void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffse
 	
 }
 
-void Level::addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color)
+void Level::addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file)
 {
-	auto ptr = std::make_unique<StaticElement>(world, pos, size, color);
+	auto ptr = std::make_unique<StaticElement>(world, pos, size, file);
 	elements.push_back(move(ptr));
 }
 
@@ -112,14 +112,14 @@ void Level::addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	elements.push_back(move(ptr));
 }
 
-void Level::addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState) {
-	auto ptr = std::make_unique<Switch>(world, pos, size, color, inputId, nbState);
+void Level::addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int inputId, int nbState) {
+	auto ptr = std::make_unique<Switch>(world, pos, size, file, inputId, nbState);
 	elements.push_back(move(ptr));
 }
 
-void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id)
+void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int id)
 {
-	auto ptr = std::make_unique<Door>(world, pos, size, color, id);
+	auto ptr = std::make_unique<Door>(world, pos, size, file, id);
 	elements.push_back(move(ptr));
 }
 

@@ -30,4 +30,6 @@ private:
 	};
 	PlayerState playerState = PlayerState::onGroud;
 	float lastY = 20;
+	sf::Texture texture;
+	sf::Sprite sprite;
 };

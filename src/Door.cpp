@@ -1,7 +1,7 @@
 #include "Door.h"
 
-Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id):
-	LevelElement(color),
+Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int id):
+	LevelElement(file),
 	id(id)
 {
 	b2BodyDef bodyDef;
@@ -10,35 +10,20 @@ Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string co
 	setBodyPointer(world.CreateBody(&bodyDef));
 
 	b2PolygonShape bodyShape;
-	bodyShape.SetAsBox(size.x / 2, size.y / 2);
+	bodyShape.SetAsBox(texture.getSize().x/2, texture.getSize().y/2);
 
 
 	getBodyPointer()->CreateFixture(&bodyShape, 0.0f);
+
+	sprite.setOrigin(-pos.x + texture.getSize().x/2, pos.y + texture.getSize().y/2);
 }
 
 void Door::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
 	if (!open)
 	{
-		b2Fixture* fixture = getBodyPointer()->GetFixtureList();
-
-		auto const poly = (b2PolygonShape*)fixture->GetShape();
-		int32 vertexCount = poly->m_count;
-
-		sf::ConvexShape convex;
-		convex.setPointCount(vertexCount);
-
-		for (int32 i = 0; i < vertexCount; ++i)
-		{
-			b2Vec2 pos = poly->m_vertices[i];
-			pos += getBodyPointer()->GetPosition();
-			convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
-		}
-		convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
-		convex.setFillColor(getColor());
-		convex.setOutlineColor(sf::Color::White);
-		convex.setOutlineThickness(0);
-		window.draw(convex);
+		sprite.setPosition(sf::Vector2f(-viewportOffset.first,- viewportOffset.second));
+		window.draw(sprite);
 	}
 }
 

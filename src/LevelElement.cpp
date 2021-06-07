@@ -1,9 +1,13 @@
 #include "LevelElement.h"
+#include <iostream>
 
-
-LevelElement::LevelElement(std::string const& color) :
-	color(color)
+LevelElement::LevelElement(std::string const& textureFile)
 {
+	bool result = texture.loadFromFile(textureFile);
+	if (!result) {
+		std::cerr << "coudl not load file" << std::endl;
+	}
+	sprite.setTexture(texture);
 }
 
 
@@ -41,10 +45,10 @@ sf::Color getColorFromString(std::string const& s) {
 	return sf::Color::Black;
 }
 
-sf::Color LevelElement::getColor()
+/*sf::Color LevelElement::getColor()
 {
 	return getColorFromString(color);
-}
+}*/
 
 void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
@@ -63,10 +67,13 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 		convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
 	}
 	convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
-	convex.setFillColor(getColor());
+	convex.setFillColor(sf::Color::Blue);
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
-	window.draw(convex);
+	//window.draw(convex);
+	sprite.setPosition(sf::Vector2f(body->GetPosition().x-viewportOffset.first, body->GetPosition().y-viewportOffset.second));
+	//std::cout << body->GetPosition().x - viewportOffset.first << "et" << body->GetPosition().y - viewportOffset.second << std::endl;
+	window.draw(sprite);
 }
 
 bool LevelElement::interract() {

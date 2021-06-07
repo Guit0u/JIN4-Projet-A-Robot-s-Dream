@@ -6,12 +6,12 @@
 class LevelElement
 {
 public:
-	explicit LevelElement(std::string const& color);
+	explicit LevelElement(std::string const& textureFile);
 	virtual ~LevelElement() = default;
 
 	b2Body* getBodyPointer();
 	void setBodyPointer(b2Body* ptr);
-	sf::Color getColor();
+	//sf::Color getColor();
 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 	virtual bool interract(); // used for switch only
@@ -19,5 +19,8 @@ public:
 
 private:
 	b2Body* body = nullptr;
-	std::string color;
+
+protected:
+	sf::Texture texture;
+	sf::Sprite sprite;
 };
