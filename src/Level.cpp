@@ -28,7 +28,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
 				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
 				child.attribute("density").as_float(), child.attribute("friction").as_float(),
-				child.attribute("color").value());
+				child.attribute("file").value());
 		}
 		else if (strcmp("Door", child.name()) == 0)
 		{
@@ -42,7 +42,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 			addPressurePlate(world,
 				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
 				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("color").value(), child.attribute("id").as_int());
+				child.attribute("file").value(), child.attribute("id").as_int());
 		}
 		else if (strcmp("Switch", child.name()) == 0)
 		{

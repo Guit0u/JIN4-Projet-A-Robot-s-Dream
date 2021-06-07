@@ -6,7 +6,7 @@ LevelElement::LevelElement(std::string const& textureFile)
 {
 	bool result = texture.loadFromFile(textureFile);
 	if (!result) {
-		std::cerr << "coudl not load file" << std::endl;
+		std::cerr << "coudl not load file" << textureFile << std::endl;
 	}
 }
 

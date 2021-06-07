@@ -18,7 +18,7 @@ Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string co
 
 	getBodyPointer()->CreateFixture(&bodyShape, 0.0f);
 	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
-	sprite.setOrigin(-pos.x + WIDTH_FRAME_DOOR, pos.y + HEIGHT_FRAME_DOOR);
+	sprite.setOrigin(-pos.x + WIDTH_FRAME_DOOR/2, pos.y + HEIGHT_FRAME_DOOR);
 }
 
 void Door::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
