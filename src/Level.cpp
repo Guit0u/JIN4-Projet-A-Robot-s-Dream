@@ -14,46 +14,47 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 	auto levelNode = node.child("Level");
 
 	if (levelNode)
-	for (auto child : levelNode.children())
 	{
-		if (strcmp("StaticElement", child.name()) == 0 )
+		for (auto child : levelNode.children())
 		{
-			addStaticElement(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("file").as_string());
+			if (strcmp("StaticElement", child.name()) == 0 )
+			{
+				addStaticElement(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("file").as_string());
+			}
+			else if (strcmp("DynamicElement", child.name()) == 0 )
+			{
+				addDynamicElement(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("density").as_float(), child.attribute("friction").as_float(),
+					child.attribute("file").value());
+			}
+			else if (strcmp("Door", child.name()) == 0)
+			{
+				addDoor(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("file").as_string(), child.attribute("id").as_int());
+			}
+			else if (strcmp("PressurePlate", child.name()) == 0)
+			{
+				addPressurePlate(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("file").value(), child.attribute("id").as_int());
+			}
+			else if (strcmp("Switch", child.name()) == 0)
+			{
+				addSwitch(world,
+					b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
+					b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
+					child.attribute("file").as_string(), child.attribute("id").as_int(),
+					child.attribute("nbStates").as_int());
+			}
 		}
-		else if (strcmp("DynamicElement", child.name()) == 0 )
-		{
-			addDynamicElement(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("density").as_float(), child.attribute("friction").as_float(),
-				child.attribute("file").value());
-		}
-		else if (strcmp("Door", child.name()) == 0)
-		{
-			addDoor(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("file").as_string(), child.attribute("id").as_int());
-		}
-		else if (strcmp("PressurePlate", child.name()) == 0)
-		{
-			addPressurePlate(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("file").value(), child.attribute("id").as_int());
-		}
-		else if (strcmp("Switch", child.name()) == 0)
-		{
-			addSwitch(world,
-				b2Vec2(child.attribute("posX").as_float(), child.attribute("posY").as_float()),
-				b2Vec2(child.attribute("sizeX").as_float(), child.attribute("sizeY").as_float()),
-				child.attribute("file").as_string(), child.attribute("id").as_int(),
-				child.attribute("nbStates").as_int());
-		}
-	}
 	}
 
 	auto enigmeNode = node.child("Enigme");
@@ -143,7 +144,7 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 		{
 			ptr->addTuyauFixe(child.attribute("type").as_string(),
 				child.attribute("orientation").as_int(),
-				std::pair<int, int>{child.attribute("posX").as_float(),child.attribute("posY").as_float()});
+				std::pair<float, float>{child.attribute("posX").as_float(),child.attribute("posY").as_float()});
 		}
 		else if (strcmp("TuyauMobile", child.name()) == 0) {
 			std::vector<int> switchs;
@@ -152,7 +153,7 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 			}
 			ptr->addTuyauMobile(child.attribute("id").as_int(),child.attribute("type").as_string(),
 				child.attribute("orientation").as_int(),
-				std::pair<int, int>{child.attribute("posX").as_float(), child.attribute("posY").as_float()},
+				std::pair<float, float>{child.attribute("posX").as_float(), child.attribute("posY").as_float()},
 				switchs);
 		}
 		else if (strcmp("Solution", child.name()) == 0) {

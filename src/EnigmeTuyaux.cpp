@@ -3,12 +3,12 @@
 EnigmeTuyaux::EnigmeTuyaux(int doorId) : Enigme(doorId)
 {}
 
-void EnigmeTuyaux::addTuyauFixe(std::string const& type, int orientation, std::pair<int, int> const& position) {
+void EnigmeTuyaux::addTuyauFixe(std::string const& type, int orientation, std::pair<float, float> const& position) {
 	auto ptr = std::make_unique<Tuyau>(type,orientation,position);
 	tuyaux.push_back(move(ptr));
 }
 
-void EnigmeTuyaux::addTuyauMobile(int id,std::string const& type, int orientation, std::pair<int, int> const& position, std::vector<int> const &switchs) {
+void EnigmeTuyaux::addTuyauMobile(int id,std::string const& type, int orientation, std::pair<float, float> const& position, std::vector<int> const &switchs) {
 	auto ptr = std::make_unique<Tuyau>(id,type, orientation, position);
 	currState[id] = orientation;
 	for (auto switchId : switchs) {
