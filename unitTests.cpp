@@ -249,7 +249,7 @@ TEST(Dynamic_level, dynamicElement)
     EXPECT_LT(pos.y, 4.0f);
 }
 
-//Enigmes
+//Enigmes and switch
 
 TEST(Enigme_link, wrongInput)
 {
@@ -267,7 +267,7 @@ TEST(Enigme_link, rightInput)
     EXPECT_TRUE(level.checkEnigme());
 }
 
-TEST(Enigme_link, switch_input)
+TEST(Enigme_link, switchInput)
 {
     b2Vec2 gravity(0.0f, -10.0f);
     b2World world(gravity);
@@ -277,23 +277,144 @@ TEST(Enigme_link, switch_input)
     level.addEnigmeLink(1, 3, 3);
 
     auto switchPtr = dynamic_cast<Switch*>(level.getElement(0));
-    auto enigmePtr = dynamic_cast<EnigmeLink*>(level.getEnigme(0));
 
     switchPtr->startContact();
+    //switch state = 0
     EXPECT_FALSE(level.checkEnigme());
 
     level.checkSwitchs();
+    //switch state = 1
     EXPECT_FALSE(level.checkEnigme());
 
     level.checkSwitchs();
     level.checkSwitchs();
+    //switch state = 3
     EXPECT_TRUE(level.checkEnigme());
 
     switchPtr->endContact();
     level.checkSwitchs();
+    //switch state = 3
     EXPECT_TRUE(level.checkEnigme());
 
     switchPtr->startContact();
     level.checkSwitchs();
+    //switch state = 0
     EXPECT_FALSE(level.checkEnigme());
+}
+
+TEST(Enigme_tuyaux, wrongInput)
+{
+    std::string xml = R"(
+        <?xml version="1.0" encoding="UTF-8"?>
+        <EnigmeTuyaux output="1">
+			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+				<Switch id="1"/>
+			</TuyauMobile>	
+			<Solution>
+				<Tuyau id="1">
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+			</Solution>	
+		</EnigmeTuyaux>)";
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(xml.c_str());
+    EXPECT_NE(0, result);
+
+    Level level;
+    level.addEnigmeTuyaux(1, doc.child("EnigmeTuyaux"));
+    EXPECT_FALSE(level.checkEnigme());
+    level.enigmeInput(1, -1); // with this enigme, the value field does not matter
+    EXPECT_FALSE(level.checkEnigme());
+}
+
+TEST(Enigme_tuyaux, rightInput)
+{
+    std::string xml = R"(
+        <?xml version="1.0" encoding="UTF-8"?>
+        <EnigmeTuyaux output="1">
+			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+				<Switch id="1"/>
+			</TuyauMobile>	
+			<Solution>
+				<Tuyau id="1">
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+			</Solution>	
+		</EnigmeTuyaux>)";
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(xml.c_str());
+    EXPECT_NE(0, result);
+
+    Level level;
+    level.addEnigmeTuyaux(1, doc.child("EnigmeTuyaux"));
+
+    level.enigmeInput(2, -1); // with this enigme, the value field does not matter
+    EXPECT_TRUE(level.checkEnigme());
+}
+
+TEST(Enigme_tuyaux, switchInput)
+{
+    std::string xml = R"(
+        <?xml version="1.0" encoding="UTF-8"?>
+        <EnigmeTuyaux output="1">
+			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+				<Switch id="1"/>
+			</TuyauMobile>	
+			<Solution>
+				<Tuyau id="1">
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+			</Solution>	
+		</EnigmeTuyaux>)";
+
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_string(xml.c_str());
+    EXPECT_NE(0, result);
+
+    b2Vec2 gravity(0.0f, -10.0f);
+    b2World world(gravity);
+    Level level;
+    level.addEnigmeTuyaux(1, doc.child("EnigmeTuyaux"));
+
+    level.addSwitch(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red", 1, 4);
+    level.addSwitch(world, { 20.0f,4.0f }, { 5.0f,5.0f }, "Red", 2, 4);
+
+    auto switch1Ptr = dynamic_cast<Switch*>(level.getElement(0));
+    auto switch2Ptr = dynamic_cast<Switch*>(level.getElement(1));
+
+    switch1Ptr->startContact();
+    level.checkSwitchs();
+    EXPECT_FALSE(level.checkEnigme());
+    switch2Ptr->startContact(); // with this the tuyau 1 should retate 2 time. For test only, impossible in-game
+    level.checkSwitchs();
+    switch2Ptr->endContact();
+    level.checkSwitchs();
+    level.checkSwitchs();
+    EXPECT_TRUE(level.checkEnigme());
 }
