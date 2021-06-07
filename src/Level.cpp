@@ -13,6 +13,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 
 	auto levelNode = node.child("Level");
 
+	if (levelNode)
 	for (auto child : levelNode.children())
 	{
 		if (strcmp("StaticElement", child.name()) == 0 )
@@ -53,23 +54,28 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 				child.attribute("nbStates").as_int());
 		}
 	}
+	}
 
 	auto enigmeNode = node.child("Enigme");
-	for (auto child : enigmeNode.children())
+	if (enigmeNode)
 	{
-		if (strcmp("EnigmeLink", child.name()) == 0)
+		for (auto child : enigmeNode.children())
 		{
-			addEnigmeLink(child.attribute("inputId").as_int(),
-				child.attribute("condValue").as_int(),
-				child.attribute("outputId").as_int());
-		}
-		else if (strcmp("EnigmeTuyaux", child.name()) == 0){
-			addEnigmeTuyaux(child.attribute("output").as_int(),child);
+			if (strcmp("EnigmeLink", child.name()) == 0)
+			{
+				addEnigmeLink(child.attribute("inputId").as_int(),
+					child.attribute("condValue").as_int(),
+					child.attribute("outputId").as_int());
+			}
+			else if (strcmp("EnigmeTuyaux", child.name()) == 0) {
+				addEnigmeTuyaux(child.attribute("output").as_int(), child);
+			}
 		}
 	}
 
 	auto dialogueNode = node.child("dialogue");
-	dialogue.load(dialogueNode, window);
+	if(dialogueNode)
+		dialogue.load(dialogueNode, window);
 
 }
 
@@ -203,4 +209,33 @@ bool Level::checkEnigme()
 		return true;
 	}
 	return false;
+}
+
+
+
+
+//methodes de tests
+
+int Level::getNbElements() const
+{
+	return elements.size();
+}
+
+int Level::getNbEnigmes() const
+{
+	return enigmes.size();
+}
+
+LevelElement* Level::getElement(int i) const
+{
+	if (i < elements.size())
+		return elements[i].get();
+	return nullptr;
+}
+
+Enigme* Level::getEnigme(int i) const
+{
+	if(i < enigmes.size())
+		return enigmes[i].get();
+	return nullptr;
 }

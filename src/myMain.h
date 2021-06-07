@@ -12,7 +12,7 @@
 #include "Level.h"
 #include "ContactListener.h"
 
-enum GameState
+enum class GameState
 {
 	gameplay,
 	dialogue

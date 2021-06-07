@@ -53,7 +53,6 @@ bool Switch::interract()
 		return true;
 	}
 	return false;
-	
 }
 
 void Switch::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {

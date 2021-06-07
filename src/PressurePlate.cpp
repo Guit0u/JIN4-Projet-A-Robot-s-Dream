@@ -39,7 +39,3 @@ void PressurePlate::endContact()
 	setStateValue(0);
 	sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
 }
-
-bool PressurePlate::isPressurePlate() {
-	return true;
-}
