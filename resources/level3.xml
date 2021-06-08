@@ -1,41 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelData>
-	<Player x="-350" y="20"/>
+	<Player x="-382" y="50"/>
 	<Level>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
-		<Door posX="250" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="1"/>
-		<Switch posX="-200" posY="22" sizeX="67" sizeY="55" file="resources/switch.png" id="1" nbStates="4"/>
-		<Switch posX="-100" posY="22" sizeX="67" sizeY="55" file="resources/switch.png" id="2" nbStates="4"/>
-		<Switch posX="0" posY="22" sizeX="67" sizeY="55" file="resources/switch.png" id="3" nbStates="4"/>
-		<Switch posX="100" posY="22" sizeX="67" sizeY="55" file="resources/switch.png" id="4" nbStates="4"/>
+		<Door posX="362" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="1"/>
+		<Switch posX="-200" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="1" nbStates="4"/>
+		<Switch posX="-100" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="2" nbStates="4"/>
+		<Switch posX="0" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="3" nbStates="4"/>
+		<Switch posX="100" posY="27" sizeX="108-" sizeY="55" file="resources/switch.png" id="4" nbStates="4"/>
 	</Level>
 	<Enigme>
 		<EnigmeTuyaux output="1">
 			<TuyauFixe type="droit" orientation="0" posX="-337" posY="337"/>
-			<TuyauMobile id="1" type="te" orientation="0" posX="-240" posY="337">
+			<TuyauFixe type="coude" orientation="0" posX="44" posY="337"/>
+			<TuyauFixe type="droit" orientation="0" posX="425" posY="337"/>
+			<TuyauMobile id="1" type="te" orientation="2" posX="-210" posY="337">
 				<Switch id="1"/>
 				<Switch id="2"/>
 			</TuyauMobile>
-			<TuyauMobile id="2" type="coude" orientation="2" posX="-240" posY="240">
+			<TuyauMobile id="2" type="coude" orientation="2" posX="-210" posY="210">
 				<Switch id="1"/>
-			</TuyauMobile>	
+			</TuyauMobile>
+			<TuyauMobile id="3" type="droit" orientation="2" posX="-83" posY="337">
+				<Switch id="1"/>
+			</TuyauMobile>
+			<TuyauMobile id="4" type="droit" orientation="0" posX="-83" posY="210">
+				<Switch id="4"/>
+			</TuyauMobile>
+			<TuyauMobile id="5" type="te" orientation="2" posX="44" posY="210">
+				<Switch id="4"/>
+			</TuyauMobile>
+			<TuyauMobile id="6" type="coude" orientation="1" posX="171" posY="210">
+				<Switch id="1"/>
+			</TuyauMobile>
+			<TuyauMobile id="7" type="coude" orientation="3" posX="171" posY="337">
+				<Switch id="3"/>
+				<Switch id="4"/>
+			</TuyauMobile>
+			<TuyauMobile id="8" type="te" orientation="0" posX="298" posY="337">
+				<Switch id="1"/>
+				<Switch id="2"/>
+				<Switch id="3"/>
+				<Switch id="4"/>
+			</TuyauMobile>
 			<Solution>
 				<Tuyau id="1">
 					<Sol orientation="0"/>
-					<Sol orientation="1"/>
 				</Tuyau>
 				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+				<Tuyau id="3">
+					<Sol orientation="0"/>
+					<Sol orientation="2"/>
+				</Tuyau>
+				<Tuyau id="4">
+					<Sol orientation="0"/>
+					<Sol orientation="2"/>
+				</Tuyau>
+				<Tuyau id="5">
+					<Sol orientation="2"/>
+				</Tuyau>
+				<Tuyau id="6">
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="7">
+					<Sol orientation="3"/>
+				</Tuyau>
+				<Tuyau id="8">
 					<Sol orientation="2"/>
 				</Tuyau>
 			</Solution>	
 		</EnigmeTuyaux>
 	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
-		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
-		<Line1 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
+		<Line0 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
+		<Line1 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
 		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
-		<Line3 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
-		<Line4 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
+		<Line3 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
+		<Line4 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue>
-	
 </LevelData>

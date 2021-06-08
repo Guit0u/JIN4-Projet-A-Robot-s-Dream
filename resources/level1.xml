@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelData>
-	<Player x="0" y="50"/>
+	<Player x="-382" y="50"/>
 	<Level>
-		<Door posX="300" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
+		<Door posX="362" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
 		<Switch posX="-100" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="1" nbStates="2"/>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
+		
 	</Level>
 	<Enigme>
 		<EnigmeLink inputId="1" condValue="1" outputId="3"/>
 	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
-		<Line0 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
-		<Line1 Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot &#xA; J'aime les boulons" />
-		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
-		<Line3 Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
-		<Line4 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
+		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "..." />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "were am i ?" />
+		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "What was that ?" />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "i cant moove" />
+		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "This is getting scary."/>
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Are you frend ? You did somthing &#xA; and give me power suply" />
+		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
+		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Was that ..."/>
+		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "It felt like the entire building was talking."/>
+		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "What is this place ?"/>
+		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue>
-	
 </LevelData>

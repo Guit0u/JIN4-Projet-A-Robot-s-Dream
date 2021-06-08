@@ -408,7 +408,7 @@ TEST(Enigme_tuyaux, switchInput)
     switch1Ptr->startContact();
     level.activateSwitchs();
     EXPECT_FALSE(level.checkEnigme());
-    switch2Ptr->startContact(); // with this the tuyau 1 should rotate 2 time with one activate switch call.
+    switch2Ptr->startContact(); // with this the pipe 1 should rotate 2 time with one activate switch call.
     level.activateSwitchs();
     switch2Ptr->endContact();
     level.activateSwitchs();
