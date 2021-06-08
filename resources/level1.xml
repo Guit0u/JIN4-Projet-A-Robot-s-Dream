@@ -2,8 +2,8 @@
 <LevelData>
 	<Player x="0" y="50"/>
 	<Level>
-		<Door posX="300" posY="0" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
-		<Switch posX="-100" posY="0" sizeX="67" sizeY="33" file="resources/switch.png" id="1" nbStates="2"/>
+		<Door posX="300" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
+		<Switch posX="-100" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="1" nbStates="2"/>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
 	</Level>
 	<Enigme>

@@ -27,7 +27,7 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
 	sprite = sf::Sprite(texture, sf::IntRect(0, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
-	sprite.setOrigin(-pos.x+WIDTH_FRAME_SWITCH/2, pos.y + HEIGHT_FRAME_SWITCH);
+	sprite.setOrigin(-pos.x+WIDTH_FRAME_SWITCH/2, pos.y + HEIGHT_FRAME_SWITCH/2);
 }
 
 

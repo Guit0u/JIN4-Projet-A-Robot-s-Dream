@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelData>
-	<Player x="-300" y="20"/>
+	<Player x="-300" y="50"/>
 	<Level>
-		<StaticElement posX="-395" posY="100" sizeX="10" sizeY="200" file="resources/wall.png"/>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
-		<Door posX="-100" posY="0" sizeX="20" sizeY="200" file="resources/door.png" id="3"/>
-		<Door posX="300" posY="0" sizeX="20" sizeY="200" file="resources/door.png" id="4"/>
-		<PressurePlate posX="150" posY="0" sizeX="73" sizeY="10" file="resources/pressure_plate.png" id="2"/>
-		<Switch posX="-200" posY="0" sizeX="4" sizeY="4" file="resources/switch.png" id="1" nbStates="2"/>
-		<DynamicElement posX="-20" posY="0" sizeX="40" sizeY="40" density="0.5" friction="1.0" file="resources/crate.png"/>
+		<Door posX="-100" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
+		<Door posX="300" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="4"/>
+		<PressurePlate posX="150" posY="-2" sizeX="70" sizeY="10" file="resources/pressure_plate.png" id="2"/>
+		<Switch posX="-200" posY="16" sizeX="108" sizeY="33" file="resources/switch.png" id="1" nbStates="2"/>
+		<DynamicElement posX="-20" posY="20" sizeX="40" sizeY="40" density="0.5" friction="1.0" file="resources/crate.png"/>
 		
 	</Level>
 	<Enigme>

@@ -20,10 +20,7 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
 
 	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
-	sprite.setOrigin(-pos.x, pos.y+size.y/2);
-
-	dimensions.first = size.x;
-	dimensions.second = size.y;
+	sprite.setOrigin(-pos.x, pos.y);
 }
 
 void DynamicElement::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {

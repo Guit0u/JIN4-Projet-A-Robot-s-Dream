@@ -84,6 +84,7 @@ void Tuyau::rotate() {
 }
 
 void Tuyau::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {
-	sprite.setPosition(-viewportOffset.first,-viewportOffset.second);
+	sprite.setPosition(-viewportOffset.first, -viewportOffset.second);
+	setOriginAndReajust(sprite, sf::Vector2f{ texture.getSize().x / 2.0f, texture.getSize().y / 2.0f });
 	window.draw(sprite);
 }
