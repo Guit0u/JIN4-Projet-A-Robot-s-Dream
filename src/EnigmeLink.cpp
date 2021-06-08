@@ -12,7 +12,7 @@ void EnigmeLink::inputEvent(int id, int value)
 	{
 		setResolved(true);
 	}
-	else if (inputId == id)
+	else if (inputId == id) // only set to false if it's the right id but not the right value
 	{
 		setResolved(false);
 	}

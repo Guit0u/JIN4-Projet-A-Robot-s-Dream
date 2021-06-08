@@ -14,7 +14,7 @@ bool Enigme::isResolved() const
 
 /*
 Check if the result of the enigme has change since laste check
-if true, revert changed false and return true
+if true, revert changed to false and return true
 */
 bool Enigme::hasChanged()
 {
