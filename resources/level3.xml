@@ -11,12 +11,12 @@
 	</Level>
 	<Enigme>
 		<EnigmeTuyaux output="1">
-			<TuyauFixe type="droit" orientation="0" posX="-400" posY="400"/>
-			<TuyauMobile id="1" type="te" orientation="0" posX="-127" posY="0">
+			<TuyauFixe type="droit" orientation="0" posX="-337" posY="337"/>
+			<TuyauMobile id="1" type="te" orientation="0" posX="-240" posY="337">
 				<Switch id="1"/>
 				<Switch id="2"/>
 			</TuyauMobile>
-			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+			<TuyauMobile id="2" type="coude" orientation="2" posX="-240" posY="240">
 				<Switch id="1"/>
 			</TuyauMobile>	
 			<Solution>

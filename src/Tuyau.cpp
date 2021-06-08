@@ -35,8 +35,8 @@ Tuyau::Tuyau(std::string const& typeTuyau, int orientation, std::pair<float, flo
 	sprite.setTexture(texture);
 	setOriginAndReajust(sprite,sf::Vector2f(texture.getSize().x/2, texture.getSize().y/2));
 
-	//for (int i = 0; i < orientation; i++)
-		//sprite.rotate(90);
+	for (int i = 0; i < orientation; i++)
+		sprite.rotate(90);
 }
 
 Tuyau::Tuyau(int id,std::string const& typeTuyau, int orientation, std::pair<float, float> const& pos) : id(id), orientation(orientation), position(pos){
@@ -68,8 +68,8 @@ Tuyau::Tuyau(int id,std::string const& typeTuyau, int orientation, std::pair<flo
 	sprite.setTexture(texture);
 	setOriginAndReajust(sprite, sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2));
 
-	//for (int i = 0; i < orientation; i++)
-		//sprite.rotate(90);
+	for (int i = 0; i < orientation; i++)
+		sprite.rotate(90);
 }
 
 int Tuyau::getId() const { return id; }
