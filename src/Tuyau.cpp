@@ -1,6 +1,12 @@
 #include "Tuyau.h"
 #include <iostream>
 
+void setOriginAndReajust(sf::Transformable& object, const sf::Vector2f& newOrigin) {
+	auto offset = newOrigin - object.getOrigin();
+	object.setOrigin(newOrigin);
+	object.move(offset);
+}
+
 Tuyau::Tuyau(std::string const& typeTuyau, int orientation, std::pair<float, float> const& pos) : orientation(orientation), position(pos) {
 	if (typeTuyau.compare("droit") == 0) {
 		type = typeTuyau::droit;
@@ -27,7 +33,7 @@ Tuyau::Tuyau(std::string const& typeTuyau, int orientation, std::pair<float, flo
 		type = typeTuyau::croix;
 	}
 	sprite.setTexture(texture);
-	sprite.setOrigin(-pos.first+texture.getSize().x/2, pos.second+texture.getSize().y/2);
+	setOriginAndReajust(sprite,sf::Vector2f(texture.getSize().x/2, texture.getSize().y/2));
 
 	//for (int i = 0; i < orientation; i++)
 		//sprite.rotate(90);
@@ -60,7 +66,7 @@ Tuyau::Tuyau(int id,std::string const& typeTuyau, int orientation, std::pair<flo
 		type = typeTuyau::croix;
 	}
 	sprite.setTexture(texture);
-	sprite.setOrigin(-pos.first, pos.second);
+	setOriginAndReajust(sprite, sf::Vector2f(texture.getSize().x / 2, texture.getSize().y / 2));
 
 	//for (int i = 0; i < orientation; i++)
 		//sprite.rotate(90);
@@ -76,6 +82,6 @@ void Tuyau::rotate() {
 }
 
 void Tuyau::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {
-	sprite.setOrigin(sprite.getOrigin().x - viewportOffset.first, sprite.getOrigin().y-viewportOffset.second);
+	sprite.setPosition(position.first-viewportOffset.first,-position.second-viewportOffset.second);
 	window.draw(sprite);
 }
