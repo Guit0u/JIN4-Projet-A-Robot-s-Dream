@@ -8,7 +8,7 @@ Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string co
 	id(id)
 {
 	b2BodyDef bodyDef;
-	bodyDef.position.Set(pos.x, pos.y+HEIGHT_FRAME_DOOR/2);
+	bodyDef.position.Set(pos.x, pos.y);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 

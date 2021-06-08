@@ -30,12 +30,19 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 
 void PressurePlate::startContact()
 {
-	setStateValue(1);
+	setStateValue(getStateValue() + 1);
 	sprite.setTextureRect(sf::IntRect(WIDTH_FRAME_PP+8, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
 }
 
 void PressurePlate::endContact()
 {
-	setStateValue(0);
-	sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
+	setStateValue(getStateValue() - 1);
+	if (getStateValue() == 0)
+	{
+		sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
+	}
+	else if (getStateValue() < 0)
+	{
+		setStateValue(0);
+	}
 }
