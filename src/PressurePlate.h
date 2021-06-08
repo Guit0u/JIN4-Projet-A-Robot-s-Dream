@@ -2,6 +2,9 @@
 #include "LevelElement.h"
 #include "ContactElement.h"
 
+/*
+class representing a object that activate when it enter in contact with a other object
+*/
 class PressurePlate : public LevelElement, public ContactElement
 {
 public:
@@ -10,6 +13,4 @@ public:
 
 	void startContact() override;
 	void endContact() override;
-
-
 };

@@ -13,7 +13,7 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
-	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>((ContactElement*)this);
+	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>((ContactElement*)this); // black magic to make it work
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 
@@ -41,6 +41,10 @@ void Switch::endContact()
 	active = false;
 }
 
+/*
+methode called when inteacting with a switch
+the return value correspond to the active state <=> the state changed when called 
+*/
 bool Switch::interract() 
 {
 	if (active)

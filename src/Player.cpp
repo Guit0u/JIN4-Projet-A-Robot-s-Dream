@@ -20,6 +20,9 @@ Player::Player(b2World& world, b2Vec2 pos)
 	body->CreateFixture(&fixtureDef);
 }
 
+/*
+methode called each frame in order to process the inputs related to player movement
+*/
 void Player::processInput()
 {
 
@@ -54,7 +57,7 @@ void Player::processInput()
 		playerState = PlayerState::jump;
 	}
 
-	b2Vec2 velocity = body->GetLinearVelocity();
+	b2Vec2 velocity = body->GetLinearVelocity(); 
 	if (velocity.LengthSquared() > maxSpeed*maxSpeed)
 	{
 		velocity.Normalize();

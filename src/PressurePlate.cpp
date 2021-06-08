@@ -10,7 +10,7 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
-	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>((ContactElement*)this);
+	bodyDef.userData.pointer = reinterpret_cast<uintptr_t>((ContactElement*)this); //black magic to make it work
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 
@@ -39,10 +39,12 @@ void PressurePlate::endContact()
 	setStateValue(getStateValue() - 1);
 	if (getStateValue() == 0)
 	{
+		// set visual to not pressed only if there is no object
 		sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
 	}
 	else if (getStateValue() < 0)
 	{
+		// failsafe
 		setStateValue(0);
 	}
 }

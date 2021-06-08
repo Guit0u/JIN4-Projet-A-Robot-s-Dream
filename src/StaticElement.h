@@ -1,6 +1,9 @@
 #pragma once
 #include "LevelElement.h"
 
+/*
+class used to define static physic element (wall, ground)
+*/
 class StaticElement : public LevelElement
 {
 public:
