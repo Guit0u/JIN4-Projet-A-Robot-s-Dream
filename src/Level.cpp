@@ -96,7 +96,7 @@ void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffse
 
 	for (size_t i = 0; i < enigmes.size(); i++)
 	{
-		enigmes[i]->draw(window);
+		enigmes[i]->draw(window,viewportOffset);
 	}
 
 
