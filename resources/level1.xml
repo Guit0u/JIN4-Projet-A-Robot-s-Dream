@@ -14,14 +14,14 @@
 		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "..." />
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "were am i ?" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "What was that ?" />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "What was that ?" />
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "i cant moove" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "This is getting scary."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "This is getting scary."/>
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Are you frend ? You did somthing &#xA; and give me power suply" />
 		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Was that ..."/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "It felt like the entire building was talking."/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "What is this place ?"/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Was that ..."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "It felt like the entire building was talking."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "What is this place ?"/>
 		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue>
 </LevelData>

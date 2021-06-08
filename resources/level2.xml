@@ -18,14 +18,14 @@
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Agan" />
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "i feel electricty" />
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "it were a time so long" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "It's robotic ?" />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "It's robotic ?" />
 		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Robot. Yes. This is how they have call me" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "They can hear me. Right." />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Do you have any name ?" />
-		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "isaac. frend called me" />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Isaac, right. Where are you" />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "They can hear me. Right." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Do you have any name ?" />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "isaac. frends called me" />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Isaac, right. Where are you" />
 		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "..." />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Great." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Great." />
 		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue>
 	

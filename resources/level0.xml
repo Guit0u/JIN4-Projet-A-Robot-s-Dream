@@ -7,14 +7,14 @@
 	<Enigme>
 	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = ""/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "..." />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "There's no one." />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "..." />
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "It's much better like this."/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Alone."/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = "Let's get in here."/>
-		<Line Speaker="resources/player_face.jpg" TextColor="White" CharacterSize="24"  string = ""/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = ""/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "..." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "There's no one." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "..." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "It's much better like this."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Alone."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Let's get in here."/>
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = ""/>
 	</dialogue>
 	
 </LevelData>

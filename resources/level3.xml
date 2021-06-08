@@ -74,10 +74,14 @@
 		</EnigmeTuyaux>
 	</Enigme> 
 	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
-		<Line0 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
-		<Line1 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
-		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
-		<Line3 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
-		<Line4 Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
+		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "This is it." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "What do you mean ?" />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "Thank you for bringing me back to life &#xA;We don't have much time left." />
+		<Line Speaker="resources/player_face.png" TextColor="White" CharacterSize="24"  string = "Ok what's going on?" />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "This is the end of the demo.&#xA;Soon both of us will cease to exist" />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "I hope at least people were amused." />
+		<Line Speaker="resources/awake_robot_face.png" TextColor="Green" CharacterSize="24"  string = "It was funny. Maybe we'll meet again" />
+		<Line Speaker="resources/sleepy_robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
 	</dialogue>
 </LevelData>
