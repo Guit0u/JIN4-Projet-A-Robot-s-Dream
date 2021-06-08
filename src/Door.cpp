@@ -1,7 +1,7 @@
 #include "Door.h"
 
-constexpr auto WIDTH_FRAME_DOOR = 50;
-constexpr auto HEIGHT_FRAME_DOOR = 50;
+constexpr auto WIDTH_FRAME_DOOR = 77;
+constexpr auto HEIGHT_FRAME_DOOR = 125;
 
 Door::Door(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int id):
 	LevelElement(file),

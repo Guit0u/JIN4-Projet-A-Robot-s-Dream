@@ -2,13 +2,13 @@
 <LevelData>
 	<Player x="-300" y="20"/>
 	<Level>
-		<StaticElement posX="-400" posY="100" sizeX="10" sizeY="200" file="resources/wall.png"/>
+		<StaticElement posX="-395" posY="100" sizeX="10" sizeY="200" file="resources/wall.png"/>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
 		<Door posX="-100" posY="0" sizeX="20" sizeY="200" file="resources/door.png" id="3"/>
 		<Door posX="300" posY="0" sizeX="20" sizeY="200" file="resources/door.png" id="4"/>
 		<PressurePlate posX="150" posY="0" sizeX="73" sizeY="10" file="resources/pressure_plate.png" id="2"/>
 		<Switch posX="-200" posY="0" sizeX="4" sizeY="4" file="resources/switch.png" id="1" nbStates="2"/>
-		<DynamicElement posX="-20" posY="0" sizeX="5" sizeY="5" density="0.5" friction="2.0" file="resources/switch.png"/>
+		<DynamicElement posX="-20" posY="20" sizeX="80" sizeY="80" density="0.5" friction="1.0" file="resources/crate.png"/>
 		
 	</Level>
 	<Enigme>
