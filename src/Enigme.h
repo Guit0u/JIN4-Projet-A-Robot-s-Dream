@@ -15,11 +15,11 @@ public:
 	bool hasChanged();
 	bool isResolved() const;
 	void setResolved(bool isresolved);
-	int getDoor() const;
+	int getDoor() const; 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
 private:
 	bool changed = false;
 	bool resolved = false;
-	int doorId;
+	int doorId; //id of the door locked by the enigme
 };

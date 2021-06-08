@@ -1,12 +1,9 @@
 #include "PressurePlate.h"
 
-constexpr auto NB_FRAMES_PP= 2;
-constexpr auto WIDTH_FRAME_PP = 80;
-constexpr auto HEIGHT_FRAME_PP = 20;
-
 PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int inputId) :
 	LevelElement(file),
-	ContactElement(inputId)
+	ContactElement(inputId),
+	frameSize(size)
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
@@ -15,7 +12,7 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	setBodyPointer(world.CreateBody(&bodyDef));
 
 	b2PolygonShape bodyShape;
-	bodyShape.SetAsBox(WIDTH_FRAME_PP / 2, HEIGHT_FRAME_PP/2);
+	bodyShape.SetAsBox(size.x / 2, size.y/2);
 
 	b2FixtureDef bodyFixtureDef;
 	bodyFixtureDef.shape = &bodyShape;
@@ -23,15 +20,17 @@ PressurePlate::PressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& si
 	bodyFixtureDef.filter.maskBits = 0xffff;
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
-	sprite = sf::Sprite(texture, sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
-	sprite.setOrigin(-pos.x + WIDTH_FRAME_PP / 2, pos.y+HEIGHT_FRAME_PP/2);
+
+	//set sprite
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
+	sprite.setOrigin(-pos.x + size.x/ 2, pos.y+size.y/2);
 }
 
 
 void PressurePlate::startContact()
 {
 	setStateValue(getStateValue() + 1);
-	sprite.setTextureRect(sf::IntRect(WIDTH_FRAME_PP+8, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
+	sprite.setTextureRect(sf::IntRect(frameSize.x, 0, frameSize.x, frameSize.y));
 }
 
 void PressurePlate::endContact()
@@ -40,7 +39,7 @@ void PressurePlate::endContact()
 	if (getStateValue() == 0)
 	{
 		// set visual to not pressed only if there is no object
-		sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_PP, HEIGHT_FRAME_PP));
+		sprite.setTextureRect(sf::IntRect(0, 0, frameSize.x, frameSize.y));
 	}
 	else if (getStateValue() < 0)
 	{

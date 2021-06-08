@@ -13,4 +13,7 @@ public:
 
 	void startContact() override;
 	void endContact() override;
+
+private:
+	b2Vec2 frameSize;
 };

@@ -1,15 +1,12 @@
 #include "Switch.h"
 #include <iostream>
 
-constexpr auto NB_FRAMES_SWITCH = 2;
-constexpr auto WIDTH_FRAME_SWITCH = 108;
-constexpr auto HEIGHT_FRAME_SWITCH = 55;
-
 
 Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int inputId, int nbStates) :
 	LevelElement(file),
 	ContactElement(inputId),
-	nbStates(nbStates)
+	nbStates(nbStates),
+	frameSize(size)
 {
 	b2BodyDef bodyDef;
 	bodyDef.position.Set(pos.x, pos.y);
@@ -18,7 +15,7 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 	setBodyPointer(world.CreateBody(&bodyDef));
 
 	b2PolygonShape bodyShape;
-	bodyShape.SetAsBox(WIDTH_FRAME_SWITCH / 2, HEIGHT_FRAME_SWITCH / 2);
+	bodyShape.SetAsBox(size.x / 2, size.y / 2);
 
 	b2FixtureDef bodyFixtureDef;
 	bodyFixtureDef.shape = &bodyShape;
@@ -26,8 +23,8 @@ Switch::Switch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::strin
 	bodyFixtureDef.filter.maskBits = 0xffff;
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
-	sprite = sf::Sprite(texture, sf::IntRect(0, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
-	sprite.setOrigin(-pos.x+WIDTH_FRAME_SWITCH/2, pos.y + HEIGHT_FRAME_SWITCH/2);
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
+	sprite.setOrigin(-pos.x+size.x/2, pos.y + size.y/2);
 }
 
 
@@ -49,12 +46,11 @@ bool Switch::interract()
 {
 	if (active)
 	{
-		//si on se trouve devant le levier et qu'on interragit, on change sa valeur, sinon ça ne fait rien
 		setStateValue((getStateValue() + 1) % nbStates);
 		if(getStateValue()%2==1)
-			sprite.setTextureRect(sf::IntRect(WIDTH_FRAME_SWITCH, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
+			sprite.setTextureRect(sf::IntRect(frameSize.x, 0, frameSize.x,frameSize.y));
 		else
-			sprite.setTextureRect(sf::IntRect(0, 0, WIDTH_FRAME_SWITCH, HEIGHT_FRAME_SWITCH));
+			sprite.setTextureRect(sf::IntRect(0, 0, frameSize.x, frameSize.y));
 		return true;
 	}
 	return false;

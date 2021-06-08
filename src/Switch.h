@@ -21,4 +21,5 @@ public:
 private:
 	int nbStates;
 	bool active = false;
+	b2Vec2 frameSize;
 };

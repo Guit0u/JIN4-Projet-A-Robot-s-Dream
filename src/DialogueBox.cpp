@@ -7,7 +7,7 @@
 
 using namespace std;
 
-sf::Color getColorFromString(string s) {
+sf::Color getColorFromString(string s) { //return sf::Color for text and background displaying
 
     if (s.compare("Black") == 0)
         return sf::Color::Black;
@@ -33,8 +33,9 @@ sf::Color getColorFromString(string s) {
 
 void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 
-    lines.clear();
-    currentLine = 0;
+    lines.clear(); //clear the lines to load new ones
+
+    currentLine = 0; //the first line to be read
 
     auto currNode = node.first_child();
 
@@ -45,12 +46,15 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 
     while(currNode) {
 
+        //background settings
+
         background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
         background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
         background.setOutlineThickness(3);
         background.setPosition(sf::Vector2f{ 3.f,window.getSize().y * 0.70f-1.f });
         background.setSize(sf::Vector2f{ window.getSize().x - 6.f, window.getSize().y * 0.30f});
 
+        //text and picture settings
         auto p = make_unique<std::pair<std::pair<sf::Texture,sf::Sprite>,sf::Text>>();
         bool result = p->first.first.loadFromFile(currNode.attribute("Speaker").as_string());
         if (!result)
@@ -58,6 +62,7 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
             std::cerr << "Could not open file image" << std::endl;
             return;
         }
+
         //set image
         p->first.second.setTexture(p->first.first);
         p->first.second.setPosition(background.getPosition());
@@ -84,7 +89,7 @@ void DialogueBox::display(sf::RenderWindow& window) {
   
 }
 
-bool DialogueBox::setNextLine() { // permet de passer à la ligne de dialogue suivante, et quitte le dialogue après la dernière node
+bool DialogueBox::setNextLine() { // allows the player to read the next line, and quit dialogue after last node with text
     if (currentLine < lines.size() - 2) {
         currentLine++;
         return false;
