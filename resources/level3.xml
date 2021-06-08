@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelData>
-	<Player x="-382" y="50"/>
+	<Player x="-382" y="50" file="resources/player.png"/>
 	<Level>
 		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
 		<Door posX="362" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="1"/>

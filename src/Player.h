@@ -22,6 +22,7 @@ public:
 
 	void processInput();
 	void setposition(b2Vec2 pos);
+	void setTexture(sf::Texture const &text);
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 	b2Vec2 getPosition() const;
 
