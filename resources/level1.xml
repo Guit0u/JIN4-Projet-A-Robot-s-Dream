@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LevelData>
-	<Player x="-382" y="50"/>
+	<Player x="-382" y="50" file="resources/player.png"/>
 	<Level>
 		<Door posX="362" posY="62" sizeX="77" sizeY="125" file="resources/door.png" id="3"/>
 		<Switch posX="-100" posY="27" sizeX="108" sizeY="55" file="resources/switch.png" id="1" nbStates="2"/>

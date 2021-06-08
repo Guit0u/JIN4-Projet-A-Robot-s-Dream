@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include <iostream>
 
 Player::Player(b2World& world, b2Vec2 pos) 
 {
@@ -18,6 +18,9 @@ Player::Player(b2World& world, b2Vec2 pos)
 	fixtureDef.friction = 1.f;
 
 	body->CreateFixture(&fixtureDef);
+
+	sprite = sf::Sprite(texture, sf::IntRect(0, 0, playerWidth,playerHight));
+	sprite.setOrigin(-pos.x+playerWidth/2, pos.y+playerHight/2);
 }
 
 /*
@@ -73,10 +76,14 @@ void Player::setposition(b2Vec2 pos)
 	body->SetLinearVelocity({ 0.0f,0.0f });
 }
 
+void Player::setTexture(sf::Texture const& text) {
+	texture = text;
+}
+
 
 void Player::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
-	b2Fixture* fixture = body->GetFixtureList();
+	/*b2Fixture* fixture = body->GetFixtureList();
 
 	auto const poly = (b2PolygonShape*)fixture->GetShape();
 	int32 vertexCount = poly->m_count;
@@ -94,7 +101,10 @@ void Player::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffs
 	convex.setFillColor(sf::Color::Green);
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
-	window.draw(convex);
+	window.draw(convex);*/
+
+	sprite.setPosition(sf::Vector2f(getPosition().x - viewportOffset.first, -getPosition().y - viewportOffset.second));
+	window.draw(sprite);
 }
 
 

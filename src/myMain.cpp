@@ -25,6 +25,13 @@ void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &w
 	pugi::xml_node playerNode = levelData.child("Player");
 	b2Vec2 playerPos = b2Vec2(playerNode.attribute("x").as_float(), playerNode.attribute("y").as_float());
 	player.setposition(playerPos);
+	
+	sf::Texture texture;
+	bool result2 = texture.loadFromFile(playerNode.attribute("file").as_string());
+	if (!result2) {
+		std::cerr << "coudl not load file" << playerNode.attribute("file").as_string() << std::endl;
+	}
+	player.setTexture(texture);
 
 }
 
