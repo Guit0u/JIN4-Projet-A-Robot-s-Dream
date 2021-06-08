@@ -1,6 +1,10 @@
 #pragma once
 #include "LevelElement.h"
 
+/*
+object subject to physic
+Fall and can be pushe around
+*/
 class DynamicElement : public LevelElement
 {
 public:

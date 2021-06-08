@@ -2,6 +2,9 @@
 #include "pugixml.hpp"
 #include "SFML/Graphics.hpp"
 
+/*
+parent class for any enigme
+*/
 class Enigme
 {
 public:

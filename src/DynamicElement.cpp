@@ -3,6 +3,7 @@
 DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& file) :
 	LevelElement(file)
 {
+	// classic constructor for a physic element
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
 	bodyDef.position.Set(pos.x, pos.y);
@@ -19,6 +20,7 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
 
+	// sprite setup
 	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
 	sprite.setOrigin(-pos.x, pos.y+size.y/2);
 
