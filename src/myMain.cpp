@@ -31,7 +31,7 @@ void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &w
 int myMain()
 {
 	GameState gamestate = GameState::gameplay;
-	int curLevel = 3;
+	int curLevel = 1;  // set the start level
 
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");
@@ -60,58 +60,63 @@ int myMain()
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
 
-	
+	sf::Clock frametimer;
+
 	while (window.isOpen())
 	{
-		//input
-		sf::Event event;
-		while (window.pollEvent(event))
+		if (frametimer.getElapsedTime().asMilliseconds() > 16.66) // will process et most 60 frames per seconds
 		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-			if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
-				if(level.setNextLine()) {
+			frametimer.restart();
+			//input
+			sf::Event event;
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed)
+					window.close();
+				if (gamestate == GameState::dialogue && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter) {
+					if (level.setNextLine()) {
+						gamestate = GameState::gameplay;
+					}
+				}
+				if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
+				{
+					loadLevel(world, level, player, window, curLevel);
 					gamestate = GameState::gameplay;
 				}
+				if (gamestate == GameState::gameplay && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
+					level.activateSwitchs();
+				}
+
 			}
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
+
+			if (gamestate == GameState::gameplay)
 			{
+				player.processInput();
+			}
+
+			if (level.checkEnigme())
+			{
+				if (gamestate == GameState::gameplay && !level.setNextLine())
+					gamestate = GameState::dialogue;
+			}
+
+			//physique
+			world.Step(timeStep, velocityIterations, positionIterations);
+
+			//affichage
+
+			window.clear();
+
+			level.draw(window, { -400.0f, -400.0f });
+			player.draw(window, { -400.0f, -400.0f });
+			window.display();
+
+			//passer au niveau suivant quand le joueur sort de la fenêtre par la droite
+			if (player.getPosition().x > 400)
+			{
+				curLevel++;
 				loadLevel(world, level, player, window, curLevel);
-				gamestate = GameState::gameplay;
 			}
-			if (gamestate == GameState::gameplay && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
-				level.activateSwitchs();
-			}
-
-		}
-
-		if (gamestate == GameState::gameplay)
-		{
-			player.processInput();
-		}
-
-		if (level.checkEnigme())
-		{
-			if (gamestate == GameState::gameplay && !level.setNextLine())
-				gamestate = GameState::dialogue;
-		}
-		
-		//physique
-		world.Step(timeStep, velocityIterations, positionIterations);
-
-		//affichage
-
-		window.clear();
-
-		level.draw(window, { -400.0f, -400.0f });
-		player.draw(window, { -400.0f, -400.0f });
-		window.display();
-
-		//passer au niveau suivant quand le joueur sort de la fenêtre par la droite
-		if (player.getPosition().x > 400)
-		{
-			curLevel++;
-			loadLevel(world, level, player, window, curLevel);
 		}
 	}
 	
