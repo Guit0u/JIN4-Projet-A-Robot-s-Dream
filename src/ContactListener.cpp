@@ -26,7 +26,9 @@ void ContactListener::BeginContact(b2Contact* contact)
                 auto PPptr = dynamic_cast<PressurePlate*>(ptrA);
                 if (PPptr) // special case : Pressure plate, call enigme input instanly
                 {
-                    level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                    //input the value 1 if there is something
+                    level->enigmeInput(ptrA->getInputId(), (int)(ptrA->getStateValue() > 0));
+                    
                 }
             }
         }
@@ -42,7 +44,7 @@ void ContactListener::BeginContact(b2Contact* contact)
                 auto PPptr = dynamic_cast<PressurePlate*>(ptrB);
                 if (PPptr)
                 {
-                    level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                    level->enigmeInput(ptrB->getInputId(), (int)(ptrB->getStateValue() > 0));
                 }
             }
         }
@@ -69,7 +71,7 @@ void ContactListener::EndContact(b2Contact* contact)
                 auto PPptr = dynamic_cast<PressurePlate*>(ptrA);
                 if (PPptr)
                 {
-                    level->enigmeInput(ptrA->getInputId(), ptrA->getStateValue());
+                    level->enigmeInput(ptrA->getInputId(), (int)(ptrA->getStateValue() > 0));
                 }
             }
         }
@@ -85,7 +87,7 @@ void ContactListener::EndContact(b2Contact* contact)
                 auto PPptr = dynamic_cast<PressurePlate*>(ptrB);
                 if (PPptr)
                 {
-                    level->enigmeInput(ptrB->getInputId(), ptrB->getStateValue());
+                    level->enigmeInput(ptrB->getInputId(), (int)(ptrB->getStateValue() > 0));
                 }
             }
         }
