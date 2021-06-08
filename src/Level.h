@@ -19,33 +19,39 @@
 #include "EnigmeTuyaux.h"
 #include "EnigmeLink.h"
 
+
+/*
+Class containing the physic structure of the world (do not do the calculation), 
+the enigmes and the dialogue
+*/
 class Level
 {
 public:
 	explicit Level() = default;
 
+	// interacting with the Level
 	void load(b2World& world, pugi::xml_node node, sf::RenderWindow &window);
 	bool setNextLine();
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
-	//ajouter les elements du niveau depuis le xml
+	// adding LevelElement
 	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
 	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color);
 	void addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
 	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState);
 	void addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id);
 
-	//ajouter les enigmes
+	// adding Enigme
 	void addEnigmeTuyaux(int outputId, pugi::xml_node node);
 	void addEnigmeLink(int inputId, int condValue, int outputId);
 
-
+	// interacting with enigmes
 	void enigmeInput(int id, int value) const;
 	bool checkEnigme();
 	void activateSwitchs();
 	void openDoor(int id, int state);
 
-	//methode de tests
+	// testing methode
 	int getNbElements() const;
 	int getNbEnigmes() const;
 	LevelElement* getElement(int i) const;

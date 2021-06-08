@@ -3,6 +3,9 @@
 #include "SFML/Graphics.hpp"
 #include <stdio.h>
 
+/*
+parent class for any element having physic (except player)
+*/
 class LevelElement
 {
 public:
