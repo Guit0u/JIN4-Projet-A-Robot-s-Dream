@@ -4,6 +4,9 @@
 #include "ContactElement.h"
 #include <iostream>
 
+/*
+Class that generate the events call for the ContactElement class
+*/
 class ContactListener : public b2ContactListener
 {
 public:
