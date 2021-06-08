@@ -55,9 +55,7 @@ int myMain()
 	loadLevel(world, level, player, window, curLevel);
 
 	
-	// Prepare for simulation. Typically we use a time step of 1/60 of a
-	// second (60Hz) and 10 iterations. This provides a high quality simulation
-	// in most game scenarios.
+	// Prepare for simulation. Time step of 1/60 of a second 
 	float timeStep = 1.0f / 60.0f;
 	int32 velocityIterations = 6;
 	int32 positionIterations = 2;
@@ -82,7 +80,7 @@ int myMain()
 				gamestate = GameState::gameplay;
 			}
 			if (gamestate == GameState::gameplay && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
-				level.checkSwitchs();
+				level.activateSwitchs();
 			}
 
 		}

@@ -282,22 +282,22 @@ TEST(Enigme_link, switchInput)
     //switch state = 0
     EXPECT_FALSE(level.checkEnigme());
 
-    level.checkSwitchs();
+    level.activateSwitchs();
     //switch state = 1
     EXPECT_FALSE(level.checkEnigme());
 
-    level.checkSwitchs();
-    level.checkSwitchs();
+    level.activateSwitchs();
+    level.activateSwitchs();
     //switch state = 3
     EXPECT_TRUE(level.checkEnigme());
 
     switchPtr->endContact();
-    level.checkSwitchs();
+    level.activateSwitchs();
     //switch state = 3
     EXPECT_TRUE(level.checkEnigme());
 
     switchPtr->startContact();
-    level.checkSwitchs();
+    level.activateSwitchs();
     //switch state = 0
     EXPECT_FALSE(level.checkEnigme());
 }
@@ -409,13 +409,13 @@ TEST(Enigme_tuyaux, switchInput)
     auto switch2Ptr = dynamic_cast<Switch*>(level.getElement(1));
 
     switch1Ptr->startContact();
-    level.checkSwitchs();
+    level.activateSwitchs();
     EXPECT_FALSE(level.checkEnigme());
     switch2Ptr->startContact(); // with this the tuyau 1 should retate 2 time.
-    level.checkSwitchs();
+    level.activateSwitchs();
     switch2Ptr->endContact();
-    level.checkSwitchs();
-    level.checkSwitchs();
+    level.activateSwitchs();
+    level.activateSwitchs();
     EXPECT_TRUE(level.checkEnigme());
 }
 

@@ -1,10 +1,14 @@
 #include "Level.h"
 
 
-
+/*
+Load the level from an xml node contening the data
+the world parameter is the object doing the physique, needed to create physic objects
+the window parameter is for the size of the DialogueBox
+*/
 void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 {
-	// on réinitialise le monde
+	// clear the level in order to load a new one (or reload it)
 	for (size_t i = 0; i < elements.size(); i++)
 	{
 		world.DestroyBody(elements[i]->getBodyPointer());
@@ -12,9 +16,10 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 	elements.clear();
 	enigmes.clear();
 
+	// load the level
+
 	auto levelNode = node.child("Level");
-	//chargement des elements du niveau
-	if (levelNode)
+	if (levelNode)	// creates the elements of the level. Those correspond to the interactive parts of the level (ground included)
 	{
 		for (auto child : levelNode.children())
 		{
@@ -58,9 +63,8 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 		}
 	}
 
-	//chargement des enigmes
 	auto enigmeNode = node.child("Enigme");
-	if (enigmeNode)
+	if (enigmeNode) // creates the enigmes of the level
 	{
 		for (auto child : enigmeNode.children())
 		{
@@ -76,69 +80,99 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 		}
 	}
 
-	//chargement des dialogues
 	auto dialogueNode = node.child("dialogue");
-	if(dialogueNode)
+	if(dialogueNode) // load dialogue
 		dialogue.load(dialogueNode, window);
 
 }
 
+/*
+Set the next line of dilogue.
+*/
 bool Level::setNextLine() {
 	return dialogue.setNextLine();
 }
 
+/*
+Draw the divers componant of the level
+the offset is used to put 0 0 at the center of the screen 
+*/
 void Level::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
-	for (size_t i = 0; i < elements.size(); i++)
+	for (size_t i = 0; i < elements.size(); i++) // draw the interactive part of the level
 	{
 		elements[i]->draw(window, viewportOffset);
 	}
 
-	for (size_t i = 0; i < enigmes.size(); i++)
+	for (size_t i = 0; i < enigmes.size(); i++) // draw the enigmes that need to be drawn
 	{
 		enigmes[i]->draw(window,viewportOffset);
 	}
 
 
-	dialogue.display(window);
+	dialogue.display(window); // draw the dialogue box
 	
 }
 
+
+/* 
+Call StaticElement constructor and put a unique_ptr to the object in elements
+*/
 void Level::addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file)
 {
 	auto ptr = std::make_unique<StaticElement>(world, pos, size, file);
 	elements.push_back(move(ptr));
 }
 
+/*
+Call DynamicElement constructor and put a unique_ptr to the object in elements
+*/
 void Level::addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color)
 {
 	auto ptr = std::make_unique<DynamicElement>(world, pos, size, density, friction, color);
 	elements.push_back(move(ptr));
 }
 
+/*
+Call PressurePlate constructor and put a unique_ptr to the object in elements
+*/
 void Level::addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId)
 {
 	auto ptr = std::make_unique<PressurePlate>(world, pos, size, color, inputId);
 	elements.push_back(move(ptr));
 }
 
+/*
+Call Switch constructor and put a unique_ptr to the object in elements
+*/
 void Level::addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int inputId, int nbState) {
 	auto ptr = std::make_unique<Switch>(world, pos, size, file, inputId, nbState);
 	elements.push_back(move(ptr));
 }
 
+/*
+Call Door constructor and put a unique_ptr to the object in elements
+*/
 void Level::addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& file, int id)
 {
 	auto ptr = std::make_unique<Door>(world, pos, size, file, id);
 	elements.push_back(move(ptr));
 }
 
+/*
+Call EnigmeLink constructor and put a unique_ptr to the object in enigmes
+*/
 void Level::addEnigmeLink(int inputId, int condValue, int outputId)
 {
 	auto ptr = std::make_unique<EnigmeLink>(inputId, condValue, outputId);
 	enigmes.push_back(move(ptr));
 }
 
+/*
+Call EnigmeTuyaux constructor
+add the tuyau composing the enigme
+put a unique_ptr to the object in enigmes
+*/
 void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 	auto ptr = std::make_unique<EnigmeTuyaux>(outputId);
 	for (auto child : node.children())
@@ -172,6 +206,11 @@ void Level::addEnigmeTuyaux(int outputId,pugi::xml_node node) {
 	enigmes.push_back(move(ptr));
 }
 
+/*
+Methode called to input a value to a enigme
+the id correspond to the id of an input port of the enigme
+enigmes that do not posses a matching input id will ignore it
+*/
 void Level::enigmeInput(int id, int value) const
 {
 	for (int i = 0; i < enigmes.size(); i++)
@@ -180,7 +219,11 @@ void Level::enigmeInput(int id, int value) const
 	}
 }
 
-void Level::checkSwitchs() {
+/*
+methode called when switch activation key is pressed
+check if the element can be interacted with and input give an enigme input if true
+*/
+void Level::activateSwitchs() {
 	for (int i = 0; i < elements.size(); i++)
 	{
 		if (elements[i]->interract())
@@ -191,6 +234,10 @@ void Level::checkSwitchs() {
 	}
 }
 
+/*
+set a door object with a matching id to state ( 0 = close, 1+ = open)
+LevelElement that are not door will juste do nothing 
+*/
 void Level::openDoor(int id, int state) {
 	for (int i = 0; i < elements.size(); i++)
 	{
@@ -198,6 +245,10 @@ void Level::openDoor(int id, int state) {
 	}
 }
 
+/*
+check the states of the enigmes and affect the door 
+return true if the last enigme is resolved (ie the level is completed)
+*/
 bool Level::checkEnigme()
 {
 	for (int i = 0; i < enigmes.size(); i++)

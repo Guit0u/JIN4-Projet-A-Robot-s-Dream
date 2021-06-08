@@ -42,7 +42,7 @@ public:
 
 	void enigmeInput(int id, int value) const;
 	bool checkEnigme();
-	void checkSwitchs();
+	void activateSwitchs();
 	void openDoor(int id, int state);
 
 	//methode de tests
