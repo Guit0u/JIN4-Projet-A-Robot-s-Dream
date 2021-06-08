@@ -19,7 +19,3 @@ void ContactElement::setStateValue(int value)
 {
 	state = value;
 }
-
-bool ContactElement::isPressurePlate() {
-	return false;
-}
