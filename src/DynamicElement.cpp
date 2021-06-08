@@ -5,7 +5,7 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(pos.x, pos.y);
+	bodyDef.position.Set(pos.x, pos.y+size.y/2);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 
@@ -20,13 +20,32 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 	getBodyPointer()->CreateFixture(&bodyFixtureDef);
 
 	sprite = sf::Sprite(texture, sf::IntRect(0, 0, size.x, size.y));
-	sprite.setOrigin(-pos.x + size.x / 2, pos.y+size.y);
+	sprite.setOrigin(-pos.x, pos.y+size.y/2);
 
 	dimensions.first = size.x;
 	dimensions.second = size.y;
 }
 
 void DynamicElement::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {
-	sprite.setPosition(sf::Vector2f(getBodyPointer()->GetPosition().x + dimensions.first/2 - viewportOffset.first, getBodyPointer()->GetPosition().y - viewportOffset.second));
+	b2Fixture* fixture =getBodyPointer()->GetFixtureList();
+
+	auto const poly = (b2PolygonShape*)fixture->GetShape();
+	int32 vertexCount = poly->m_count;
+
+	sf::ConvexShape convex;
+	convex.setPointCount(vertexCount);
+
+	for (int32 i = 0; i < vertexCount; ++i)
+	{
+		b2Vec2 pos = poly->m_vertices[i];
+		pos += getBodyPointer()->GetPosition();
+		convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
+	}
+	convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
+	convex.setFillColor(sf::Color::Blue);
+	convex.setOutlineColor(sf::Color::White);
+	convex.setOutlineThickness(0);
+	window.draw(convex);
+	sprite.setPosition(sf::Vector2f(getBodyPointer()->GetPosition().x - viewportOffset.first, -getBodyPointer()->GetPosition().y - viewportOffset.second));
 	window.draw(sprite);
 }
