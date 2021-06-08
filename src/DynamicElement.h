@@ -5,5 +5,7 @@ class DynamicElement : public LevelElement
 {
 public:
 	explicit DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color);
-
+	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) override;
+private:
+	std::pair<float, float> dimensions;
 };

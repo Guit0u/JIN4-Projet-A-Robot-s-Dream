@@ -5,7 +5,7 @@ Player::Player(b2World& world, b2Vec2 pos)
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(pos.x, pos.y);
+	bodyDef.position.Set(pos.x, pos.y-playerHight);	
 
 	body = world.CreateBody(&bodyDef);
 
@@ -14,8 +14,8 @@ Player::Player(b2World& world, b2Vec2 pos)
 
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;
-	fixtureDef.density = 0.5f;
-	fixtureDef.friction = 1.0f;
+	fixtureDef.density = 1.f;
+	fixtureDef.friction = 1.f;
 
 	body->CreateFixture(&fixtureDef);
 }

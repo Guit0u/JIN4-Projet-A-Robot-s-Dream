@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LevelData>
+	<Player x="0" y="20"/>
+	<Level>
+		<StaticElement posX="0" posY="-2" sizeX="800" sizeY="4" file="resources/ground.png"/>
+		<Door posX="100" posY="10" sizeX="4" sizeY="20" file="resources/door.png" id="1"/>
+		<Switch posX="10" posY="5" sizeX="4" sizeY="4" file="resources/switch.png" id="1" nbStates="4"/>
+		<Switch posX="50" posY="5" sizeX="4" sizeY="4" file="resources/switch.png" id="2" nbStates="4"/>
+		<Switch posX="-10" posY="5" sizeX="4" sizeY="4" file="resources/switch.png" id="3" nbStates="4"/>
+		<Switch posX="-100" posY="5" sizeX="4" sizeY="4" file="resources/switch.png" id="4" nbStates="4"/>
+	</Level>
+	<Enigme>
+		<EnigmeTuyaux output="1">
+			<TuyauFixe type="droit" orientation="0" posX="0" posY="0"/>
+			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+				<Switch id="1"/>
+				<Switch id="2"/>
+			</TuyauMobile>
+			<TuyauMobile id="2" type="coude" orientation="2" posX="127" posY="127">
+				<Switch id="1"/>
+			</TuyauMobile>	
+			<Solution>
+				<Tuyau id="1">
+					<Sol orientation="0"/>
+					<Sol orientation="1"/>
+				</Tuyau>
+				<Tuyau id="2">
+					<Sol orientation="2"/>
+				</Tuyau>
+			</Solution>	
+		</EnigmeTuyaux>
+	</Enigme> 
+	<dialogue FontFile="resources/Qdbettercomicsansalternates-z8823.ttf" BackColor = "Black" BackOutlineColor = "Blue">
+		<Line0 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = ""/>
+		<Line1 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup je suis un robot" />
+		<Line2 Speaker="resources/player_face.jpg" TextColor="Red" CharacterSize="24"  string = "Blip bloup tu veux etre mon ami ?" />
+		<Line3 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "Blip bloup c'est la fin des dialogues" />
+		<Line4 Speaker="resources/robot_face.png" TextColor="Green" CharacterSize="24"  string = "" />
+	</dialogue>
+	
+</LevelData>

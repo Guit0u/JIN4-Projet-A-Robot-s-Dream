@@ -81,7 +81,7 @@ int myMain()
 				loadLevel(world, level, player, window, curLevel);
 				gamestate = GameState::gameplay;
 			}
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
+			if (gamestate == GameState::gameplay && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E) {
 				level.checkSwitchs();
 			}
 
@@ -105,8 +105,8 @@ int myMain()
 
 		window.clear();
 
-		player.draw(window, { -400.0f, -400.0f });
 		level.draw(window, { -400.0f, -400.0f });
+		player.draw(window, { -400.0f, -400.0f });
 		window.display();
 
 		//passer au niveau suivant quand le joueur sort de la fenêtre par la droite

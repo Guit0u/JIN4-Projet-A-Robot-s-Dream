@@ -44,6 +44,13 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
     }
 
     while(currNode) {
+
+        background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
+        background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
+        background.setOutlineThickness(3);
+        background.setPosition(sf::Vector2f{ 3.f,window.getSize().y * 0.70f-1.f });
+        background.setSize(sf::Vector2f{ window.getSize().x - 6.f, window.getSize().y * 0.30f});
+
         auto p = make_unique<std::pair<std::pair<sf::Texture,sf::Sprite>,sf::Text>>();
         bool result = p->first.first.loadFromFile(currNode.attribute("Speaker").as_string());
         if (!result)
@@ -53,14 +60,13 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
         }
         //set image
         p->first.second.setTexture(p->first.first);
-        p->first.second.setScale(0.75f,0.75f);
-        p->first.second.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
+        p->first.second.setPosition(background.getPosition());
 
         //set text
         p->second.setCharacterSize(currNode.attribute("CharacterSize").as_int());
         p->second.setFillColor(getColorFromString(currNode.attribute("TextColor").as_string()));
-        p->second.setString(currNode.attribute("string").as_string());
-        p->second.setPosition(sf::Vector2f{ 320.f,window.getSize().y * 0.66f });
+        p->second.setString(currNode.attribute("string").as_string());  
+        p->second.setPosition(sf::Vector2f{ background.getPosition().x + p->first.first.getSize().x + 30 , background.getPosition().y + background.getSize().y/3 });
         p->second.setFont(font);
 
         lines.push_back(move(p));
@@ -68,14 +74,6 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 
         currNode = currNode.next_sibling();
     }
-    
-    //set background
-    background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
-    background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
-    background.setOutlineThickness(2);
-    background.setPosition(sf::Vector2f{10.f,window.getSize().y * 0.66f });
-    background.setSize(sf::Vector2f{window.getSize().x-20.f, window.getSize().y*0.33f-10.f});
-
 }
 
 void DialogueBox::display(sf::RenderWindow& window) {

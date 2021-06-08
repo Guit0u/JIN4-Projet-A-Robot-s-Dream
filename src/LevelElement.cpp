@@ -1,9 +1,13 @@
 #include "LevelElement.h"
+#include <iostream>
 
 
-LevelElement::LevelElement(std::string const& color) :
-	color(color)
+LevelElement::LevelElement(std::string const& textureFile)
 {
+	bool result = texture.loadFromFile(textureFile);
+	if (!result) {
+		std::cerr << "coudl not load file" << textureFile << std::endl;
+	}
 }
 
 
@@ -41,14 +45,14 @@ sf::Color getColorFromString(std::string const& s) {
 	return sf::Color::Black;
 }
 
-sf::Color LevelElement::getColor()
+/*sf::Color LevelElement::getColor()
 {
 	return getColorFromString(color);
-}
+}*/
 
 void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset)
 {
-	b2Fixture* fixture = body->GetFixtureList();
+	/*b2Fixture* fixture = body->GetFixtureList();
 
 	auto const poly = (b2PolygonShape*)fixture->GetShape();
 	int32 vertexCount = poly->m_count;
@@ -63,10 +67,13 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 		convex.setPoint(i, sf::Vector2f(pos.x, -pos.y));
 	}
 	convex.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
-	convex.setFillColor(getColor());
+	convex.setFillColor(sf::Color::Blue);
 	convex.setOutlineColor(sf::Color::White);
 	convex.setOutlineThickness(0);
-	window.draw(convex);
+	window.draw(convex);*/
+
+	sprite.setPosition(sf::Vector2f(-viewportOffset.first, -viewportOffset.second));
+	window.draw(sprite);
 }
 
 bool LevelElement::interract() {

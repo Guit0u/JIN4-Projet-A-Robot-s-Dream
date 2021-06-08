@@ -3,11 +3,11 @@
 #include "SFML/Graphics.hpp"
 #include <stdio.h>
 
-#define playerWidth 10
-#define playerHight 10
+#define playerWidth 50
+#define playerHight 80
 #define maxSpeed 100
-#define horizontalInpulseIntensity 5000
-#define verticalInputIntesity 200000
+#define horizontalInpulseIntensity 1000000
+#define verticalInputIntesity 100000000
 
 class Player
 {
@@ -30,4 +30,6 @@ private:
 	};
 	PlayerState playerState = PlayerState::onGroud;
 	float lastY = 20;
+	sf::Texture texture;
+	sf::Sprite sprite;
 };
