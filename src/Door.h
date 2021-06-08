@@ -1,6 +1,9 @@
 #pragma once
 #include "LevelElement.h"
 
+/*
+static object whose physic can be deactivated
+*/
 class Door : public LevelElement
 {
 public:

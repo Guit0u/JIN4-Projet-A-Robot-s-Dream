@@ -30,6 +30,10 @@ void Door::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset
 	}
 }
 
+/*
+check if the id match and change state acordingly
+set/reset corectly the physic state regardless of matching id
+*/
 void Door::setElementState(int inId, int state)
 {
 	if (inId == id)

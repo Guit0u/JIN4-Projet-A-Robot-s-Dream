@@ -1,6 +1,9 @@
 #pragma once
 #include "Enigme.h"
 
+/*
+Direct link between an input (pressure plate, switch) to a output (door) with a condition for opening
+*/
 class EnigmeLink : public Enigme
 {
 public:
