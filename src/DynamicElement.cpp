@@ -5,7 +5,7 @@ DynamicElement::DynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& 
 {
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(pos.x, pos.y+size.y/2);
+	bodyDef.position.Set(pos.x, pos.y);
 
 	setBodyPointer(world.CreateBody(&bodyDef));
 

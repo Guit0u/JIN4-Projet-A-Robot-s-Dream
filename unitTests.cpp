@@ -9,6 +9,9 @@
 #include "LevelElement.h"
 #include "Enigme.h"
 
+
+
+
 //Player
 
 TEST(Initialisation_player, constructeur) {
@@ -64,12 +67,11 @@ TEST(Initialisation_level, addStaticElement)
     b2World world(gravity);
 
     Level level;
-    level.addStaticElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red");
+    level.addStaticElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "placeHolder.png");
 
     EXPECT_EQ(level.getNbElements(), 1);
     EXPECT_EQ(level.getNbEnigmes(), 0);
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2);
     EXPECT_EQ(pos.y, 4);
@@ -82,12 +84,11 @@ TEST(Initialisation_level, addDynamicElement)
     b2World world(gravity);
 
     Level level;
-    level.addDynamicElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, 1.0f, 1.0f, "Red");
+    level.addDynamicElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, 1.0f, 1.0f, "placeHolder.png");
 
     EXPECT_EQ(level.getNbElements(), 1);
     EXPECT_EQ(level.getNbEnigmes(), 0);
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2);
     EXPECT_EQ(pos.y, 4);
@@ -100,12 +101,11 @@ TEST(Initialisation_level, addPressurePlate)
     b2World world(gravity);
 
     Level level;
-    level.addPressurePlate(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red", 1);
+    level.addPressurePlate(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "placeHolder.png", 1);
 
     EXPECT_EQ(level.getNbElements(), 1);
     EXPECT_EQ(level.getNbEnigmes(), 0);
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2);
     EXPECT_EQ(pos.y, 4);
@@ -118,12 +118,11 @@ TEST(Initialisation_level, addSwitch)
     b2World world(gravity);
 
     Level level;
-    level.addSwitch(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red", 1, 4);
+    level.addSwitch(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "placeHolder.png", 1, 4);
 
     EXPECT_EQ(level.getNbElements(), 1);
     EXPECT_EQ(level.getNbEnigmes(), 0);
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2);
     EXPECT_EQ(pos.y, 4);
@@ -136,12 +135,11 @@ TEST(Initialisation_level, addDoor)
     b2World world(gravity);
 
     Level level;
-    level.addDoor(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "Red", 4);
+    level.addDoor(world, { 2.0f,4.0f }, { 5.0f,5.0f }, "placeHolder.png", 4);
 
     EXPECT_EQ(level.getNbElements(), 1);
     EXPECT_EQ(level.getNbEnigmes(), 0);
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2);
     EXPECT_EQ(pos.y, 4);
@@ -231,7 +229,7 @@ TEST(Dynamic_level, dynamicElement)
     b2World world(gravity);
 
     Level level;
-    level.addDynamicElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, 1.0f, 1.0f, "Red");
+    level.addDynamicElement(world, { 2.0f,4.0f }, { 5.0f,5.0f }, 1.0f, 1.0f, "placeHolder.png");
 
     float timeStep = 1.0f / 60.0f;
     int32 velocityIterations = 6;
@@ -243,7 +241,6 @@ TEST(Dynamic_level, dynamicElement)
     }
 
     LevelElement* elementPtr = level.getElement(0);
-    EXPECT_EQ(elementPtr->getColor(), sf::Color::Red);
     b2Vec2 pos = elementPtr->getBodyPointer()->GetPosition();
     EXPECT_EQ(pos.x, 2.0f);
     EXPECT_LT(pos.y, 4.0f);
@@ -411,7 +408,7 @@ TEST(Enigme_tuyaux, switchInput)
     switch1Ptr->startContact();
     level.activateSwitchs();
     EXPECT_FALSE(level.checkEnigme());
-    switch2Ptr->startContact(); // with this the tuyau 1 should retate 2 time.
+    switch2Ptr->startContact(); // with this the tuyau 1 should rotate 2 time with one activate switch call.
     level.activateSwitchs();
     switch2Ptr->endContact();
     level.activateSwitchs();
@@ -419,10 +416,27 @@ TEST(Enigme_tuyaux, switchInput)
     EXPECT_TRUE(level.checkEnigme());
 }
 
+
+/* TEST TO DO
+- Pressure Plate (broken attempt below)
+- Door
+- Player input
+- Player state (jump limit)
+- Dialogue
+- Game state
+- display
+*/
+
+
+
+
+
+
+
 //Pressure Plate
 
-/*
-TEST(PressurePlate, dynamicActivation)   not working in test but working fine ingame ...
+/* not working in test but working fine ingame ...
+TEST(PressurePlate, dynamicActivation)   
 {
     b2Vec2 gravity(0.0f, -100.0f);
     b2World world(gravity);

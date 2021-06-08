@@ -11,7 +11,6 @@ public:
 
 	b2Body* getBodyPointer();
 	void setBodyPointer(b2Body* ptr);
-	//sf::Color getColor();
 
 	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 	virtual bool interract(); // used for switch only
