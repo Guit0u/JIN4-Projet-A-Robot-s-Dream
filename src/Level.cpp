@@ -4,6 +4,7 @@
 
 void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 {
+	// on réinitialise le monde
 	for (size_t i = 0; i < elements.size(); i++)
 	{
 		world.DestroyBody(elements[i]->getBodyPointer());
@@ -12,7 +13,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 	enigmes.clear();
 
 	auto levelNode = node.child("Level");
-
+	//chargement des elements du niveau
 	if (levelNode)
 	{
 		for (auto child : levelNode.children())
@@ -57,6 +58,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 		}
 	}
 
+	//chargement des enigmes
 	auto enigmeNode = node.child("Enigme");
 	if (enigmeNode)
 	{
@@ -74,6 +76,7 @@ void Level::load(b2World& world, pugi::xml_node node, sf::RenderWindow &window)
 		}
 	}
 
+	//chargement des dialogues
 	auto dialogueNode = node.child("dialogue");
 	if(dialogueNode)
 		dialogue.load(dialogueNode, window);

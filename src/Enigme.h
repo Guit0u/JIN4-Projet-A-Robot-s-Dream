@@ -13,7 +13,7 @@ public:
 	bool isResolved() const;
 	void setResolved(bool isresolved);
 	int getDoor() const;
-	virtual void draw(sf::RenderWindow& window);
+	virtual void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
 private:
 	bool changed = false;

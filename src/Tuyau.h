@@ -6,9 +6,9 @@
 class Tuyau
 {
 public:
-	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const& position);
-	explicit Tuyau(int id,std::string const& type, int orientation, std::pair<float, float> const &position);
-	void draw(sf::RenderWindow& window);
+	explicit Tuyau(std::string const& type, int orientation, std::pair<float, float> const& position);//constucteur pour tuyau fixe
+	explicit Tuyau(int id,std::string const& type, int orientation, std::pair<float, float> const &position);//constructeur pour tuyau mobile
+	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 	void rotate();
 	int getId() const;
 	int getOrientation() const;

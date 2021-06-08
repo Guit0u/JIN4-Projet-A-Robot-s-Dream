@@ -11,12 +11,12 @@ void EnigmeTuyaux::addTuyauFixe(std::string const& type, int orientation, std::p
 void EnigmeTuyaux::addTuyauMobile(int id,std::string const& type, int orientation, std::pair<int, int> const& position, std::vector<int> const &switchs) {
 	auto ptr = std::make_unique<Tuyau>(id,type, orientation, position);
 	currState[id] = orientation;
-	for (auto switchId : switchs) {
+	for (auto switchId : switchs) { //gestion des interrupteurs
 		if (switchToTuyaux.find(switchId) != switchToTuyaux.end()) {
-			switchToTuyaux[switchId].push_back(ptr.get());
+			switchToTuyaux[switchId].push_back(ptr.get()); //si l'interrupteur existe deja (donc gere un autre tuyau) on ajoute le nouveau tuyau dans le vecteur
 		}
 		else {
-			switchToTuyaux[switchId] = std::vector<Tuyau*>{ptr.get()};
+			switchToTuyaux[switchId] = std::vector<Tuyau*>{ptr.get()}; //sinon on crée un vecteur correspondant au switch
 		}
 	}
 	tuyaux.push_back(move(ptr));
@@ -34,19 +34,19 @@ void EnigmeTuyaux::updateCurrState(const Tuyau* tuyau) {
 
 void EnigmeTuyaux::inputEvent(int id, int value){
 	if (switchToTuyaux.find(id) != switchToTuyaux.end()) {
-		for (size_t i = 0; i < switchToTuyaux[id].size(); i++)
+		for (size_t i = 0; i < switchToTuyaux[id].size(); i++) // fait tourner tous les tuyaux liés à l'interrupteur activé
 		{
-			switchToTuyaux[id][i]->rotate();
+			switchToTuyaux[id][i]->rotate(); 
 			updateCurrState(switchToTuyaux[id][i]);	
 		}
 	}
-	checkResolved();
+	checkResolved(); //vérifie si on a gagné
 }
 
-void EnigmeTuyaux::draw(sf::RenderWindow& window) {
+void EnigmeTuyaux::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {
 	for (size_t i = 0; i < tuyaux.size(); i++)
 	{
-		tuyaux.at(i)->draw(window);
+		tuyaux.at(i)->draw(window,viewportOffset);
 	}
 }
 

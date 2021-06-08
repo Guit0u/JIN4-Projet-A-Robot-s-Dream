@@ -39,7 +39,7 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
     auto currNode = node.first_child();
 
     if (!font.loadFromFile(node.attribute("FontFile").as_string())){
-        cout << "assassin de la police" << endl;
+        cout << "Could not open font file" << endl;
             exit(1);
     }
 
@@ -51,10 +51,12 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
             std::cerr << "Could not open file image" << std::endl;
             return;
         }
+        //set image
         p->first.second.setTexture(p->first.first);
         p->first.second.setScale(0.75f,0.75f);
         p->first.second.setPosition(sf::Vector2f{ 10.f,window.getSize().y * 0.66f });
 
+        //set text
         p->second.setCharacterSize(currNode.attribute("CharacterSize").as_int());
         p->second.setFillColor(getColorFromString(currNode.attribute("TextColor").as_string()));
         p->second.setString(currNode.attribute("string").as_string());
@@ -66,7 +68,8 @@ void DialogueBox::load(pugi::xml_node const &node, sf::RenderWindow &window) {
 
         currNode = currNode.next_sibling();
     }
-
+    
+    //set background
     background.setFillColor(getColorFromString(node.attribute("BackColor").as_string()));
     background.setOutlineColor(getColorFromString(node.attribute("BackOutlineColor").as_string()));
     background.setOutlineThickness(2);
@@ -83,11 +86,11 @@ void DialogueBox::display(sf::RenderWindow& window) {
   
 }
 
-bool DialogueBox::setNextLine() {
+bool DialogueBox::setNextLine() { // permet de passer à la ligne de dialogue suivante, et quitte le dialogue après la dernière node
     if (currentLine < lines.size() - 2) {
         currentLine++;
         return false;
-    }
+    }                                   
     if (currentLine < lines.size() - 1)
         currentLine++;
     return true;    

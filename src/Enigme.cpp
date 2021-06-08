@@ -33,6 +33,6 @@ void Enigme::setResolved(bool isResolved)
 	resolved = isResolved;
 }
 
-void Enigme::draw(sf::RenderWindow& window) {
+void Enigme::draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset) {
 	//do nothing
 }

@@ -28,14 +28,17 @@ public:
 	bool setNextLine();
 	void draw(sf::RenderWindow& window, std::pair<float, float> viewportOffset);
 
+	//ajouter les elements du niveau depuis le xml
 	void addStaticElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color);
 	void addDynamicElement(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, float density, float friction, std::string const& color);
 	void addPressurePlate(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId);
 	void addSwitch(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int inputId, int nbState);
 	void addDoor(b2World& world, b2Vec2 const& pos, b2Vec2 const& size, std::string const& color, int id);
 
+	//ajouter les enigmes
 	void addEnigmeTuyaux(int outputId, pugi::xml_node node);
 	void addEnigmeLink(int inputId, int condValue, int outputId);
+
 
 	void enigmeInput(int id, int value) const;
 	bool checkEnigme();

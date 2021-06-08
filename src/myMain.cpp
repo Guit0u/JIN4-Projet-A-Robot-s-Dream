@@ -109,7 +109,7 @@ int myMain()
 		level.draw(window, { -400.0f, -400.0f });
 		window.display();
 
-
+		//passer au niveau suivant quand le joueur sort de la fenêtre par la droite
 		if (player.getPosition().x > 400)
 		{
 			curLevel++;

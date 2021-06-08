@@ -39,6 +39,7 @@ bool Switch::interract()
 {
 	if (active)
 	{
+		//si on se trouve devant le levier et qu'on interragit, on change sa valeur, sinon ça ne fait rien
 		setStateValue((getStateValue() + 1) % nbStates);
 		return true;
 	}

@@ -70,6 +70,7 @@ void LevelElement::draw(sf::RenderWindow& window, std::pair<float, float> viewpo
 }
 
 bool LevelElement::interract() {
+	//only switches have interaction override
 	return false;
 }
 
