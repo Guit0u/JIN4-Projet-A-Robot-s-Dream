@@ -5,9 +5,10 @@
 
 #define playerWidth 50
 #define playerHight 80
-#define maxSpeed 5000
 
-// high value du to physic engine
+
+// high values du to physic engine
+#define maxSpeed 12000
 #define horizontalInpulseIntensity 1000000 
 #define verticalInputIntesity 100000000
 
