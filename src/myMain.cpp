@@ -31,7 +31,7 @@ void loadLevel(b2World& world, Level& level, Player& player, sf::RenderWindow &w
 int myMain()
 {
 	GameState gamestate = GameState::gameplay;
-	int curLevel = 1;
+	int curLevel = 3;
 
 	//define window
 	sf::RenderWindow window(sf::VideoMode(windowHeight, windowWidth), "test platforme");

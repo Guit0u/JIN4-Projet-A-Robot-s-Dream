@@ -3,7 +3,7 @@
 
 /*
 object subject to physic
-Fall and can be pushe around
+Fall and can be pushed around
 */
 class DynamicElement : public LevelElement
 {

@@ -11,8 +11,8 @@
 	</Level>
 	<Enigme>
 		<EnigmeTuyaux output="1">
-			<TuyauFixe type="droit" orientation="0" posX="0" posY="0"/>
-			<TuyauMobile id="1" type="te" orientation="0" posX="127" posY="0">
+			<TuyauFixe type="droit" orientation="0" posX="-400" posY="400"/>
+			<TuyauMobile id="1" type="te" orientation="0" posX="-127" posY="0">
 				<Switch id="1"/>
 				<Switch id="2"/>
 			</TuyauMobile>
