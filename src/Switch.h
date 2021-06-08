@@ -2,6 +2,10 @@
 #include "LevelElement.h"
 #include "ContactElement.h"
 
+
+/*
+class defining an interactive object whose state change  when active and calling interract, in a cyclical manner
+*/
 class Switch : public LevelElement, public ContactElement
 {
 public:

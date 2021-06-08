@@ -5,10 +5,15 @@
 
 #define playerWidth 50
 #define playerHight 80
-#define maxSpeed 100
-#define horizontalInpulseIntensity 1000000
+#define maxSpeed 5000
+
+// high value du to physic engine
+#define horizontalInpulseIntensity 1000000 
 #define verticalInputIntesity 100000000
 
+/*
+Class for the object that the use move around with the arrow keys
+*/
 class Player
 {
 public:
